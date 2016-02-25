@@ -82,6 +82,14 @@ module.exports = function (grunt) {
       core: {
         src: 'js/*.js'
       }
+    },
+    concat: {
+      core: {
+        src: [
+          'js/main.js'
+        ],
+        dest: 'html/assets/app/js/application.js'
+      }
     }
   });
 };
