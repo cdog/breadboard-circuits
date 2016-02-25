@@ -34,6 +34,15 @@ module.exports = function (grunt) {
       core: {
         src: 'html/assets/app/css/*.css'
       }
+    },
+    csscomb: {
+      options: {
+        config: 'less/.csscomb.json'
+      },
+      core: {
+        src: 'html/assets/app/css/style.css',
+        dest: 'html/assets/app/css/style.css'
+      }
     }
   });
 };
