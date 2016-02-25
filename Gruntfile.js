@@ -43,6 +43,14 @@ module.exports = function (grunt) {
         src: 'html/assets/app/css/style.css',
         dest: 'html/assets/app/css/style.css'
       }
+    },
+    csslint: {
+      options: {
+        csslintrc: 'less/.csslintrc'
+      },
+      core: {
+        src: 'html/assets/app/css/style.css'
+      }
     }
   });
 };
