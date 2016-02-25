@@ -10,10 +10,20 @@
     "type": "git",
     "url": "git+https://github.com/cdog/breadboard-circuits.git"
   },
+  "keywords": [
+    "breadboard",
+    "circuits",
+    "gh-pages",
+    "grunt",
+    "jekyll",
+    "less",
+    "workflow"
+  ],
   "author": "Cătălin Dogaru",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cdog/breadboard-circuits/issues"
   },
-  "homepage": "https://github.com/cdog/breadboard-circuits#readme"
+  "homepage": "https://github.com/cdog/breadboard-circuits#readme",
+  "private": true
 }
