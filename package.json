@@ -1,0 +1,19 @@
+{
+  "name": "breadboard-circuits",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdog/breadboard-circuits.git"
+  },
+  "author": "Cătălin Dogaru",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cdog/breadboard-circuits/issues"
+  },
+  "homepage": "https://github.com/cdog/breadboard-circuits#readme"
+}
