@@ -119,6 +119,11 @@ module.exports = function (grunt) {
           }
         ]
       }
+    },
+    env: {
+      build: {
+        JEKYLL_ENV: grunt.option('environment') || 'development'
+      }
     }
   });
 };
