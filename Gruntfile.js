@@ -190,6 +190,18 @@ module.exports = function (grunt) {
       },
       watch: ['_watch', 'jekyll:watch'],
       serve: ['_watch', 'jekyll:serve']
+    },
+    buildcontrol: {
+      options: {
+        commit: true,
+        push: true
+      },
+      pages: {
+        options: {
+          remote: 'git@github.com:cdog/breadboard-circuits.git',
+          branch: 'gh-pages'
+        }
+      }
     }
   });
 };
