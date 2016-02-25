@@ -1,4 +1,6 @@
 (function ($) {
+  'use strict';
+
   var canvasId = 'canvas';
   var canvasWidth = '100%';
   var canvasHeight = '100%';
