@@ -140,6 +140,9 @@ module.exports = function (grunt) {
           watch: true
         }
       }
+    },
+    htmllint: {
+      src: 'dist/**/*.html'
     }
   });
 };
