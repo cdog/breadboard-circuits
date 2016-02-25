@@ -1,0 +1,21 @@
+# Build
+source:       html
+destination:  dist
+
+# Encoding
+encoding: utf-8
+
+# Server
+port:     4000
+host:     127.0.0.1
+baseurl:  ""
+url:      ""
+
+# Permalinks
+permalink:  pretty
+
+# Site settings
+title: Breadboard Circuits
+tagline:
+description:
+author: Cătălin Dogaru
