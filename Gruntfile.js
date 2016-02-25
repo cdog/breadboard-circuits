@@ -219,4 +219,7 @@ module.exports = function (grunt) {
       grunt.task.run('_htmlmin');
     }
   });
+
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.renameTask('watch', '_watch');
 };
