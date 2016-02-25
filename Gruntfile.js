@@ -222,4 +222,18 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.renameTask('watch', '_watch');
+
+  grunt.registerTask('watch', ['env', 'concurrent:watch']);
+  grunt.registerTask('serve', ['env', 'concurrent:serve']);
+
+  grunt.registerTask('assets', 'copy');
+  grunt.registerTask('css', ['less', 'postcss', 'csscomb', 'csslint', 'cssmin']);
+  grunt.registerTask('js', ['eslint', 'jscs', 'concat', 'uglify']);
+  grunt.registerTask('html', ['jekyll:build', 'htmllint', 'htmlmin']);
+
+  grunt.registerTask('build', ['env', 'assets', 'css', 'js', 'html']);
+  grunt.registerTask('test', ['clean', 'build']);
+  grunt.registerTask('deploy', 'buildcontrol');
+
+  grunt.registerTask('default', 'build');
 };
