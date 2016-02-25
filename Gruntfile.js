@@ -202,6 +202,10 @@ module.exports = function (grunt) {
           branch: 'gh-pages'
         }
       }
+    },
+    clean: {
+      assets: 'html/assets',
+      dist: 'dist'
     }
   });
 };
