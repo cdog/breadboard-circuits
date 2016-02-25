@@ -65,6 +65,12 @@ module.exports = function (grunt) {
         dest: 'html/assets/app/css',
         ext: '.min.css'
       }
+    },
+    eslint: {
+      options: {
+        configFile: 'js/.eslintrc'
+      },
+      target: 'js/*.js'
     }
   });
 };
