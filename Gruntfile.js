@@ -208,4 +208,15 @@ module.exports = function (grunt) {
       dist: 'dist'
     }
   });
+
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.renameTask('htmlmin', '_htmlmin');
+
+  grunt.registerTask('htmlmin', function () {
+    // grunt.task.requires('env');
+
+    if (process.env.JEKYLL_ENV === 'production') {
+      grunt.task.run('_htmlmin');
+    }
+  });
 };
