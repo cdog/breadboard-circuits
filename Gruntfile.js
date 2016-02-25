@@ -90,6 +90,18 @@ module.exports = function (grunt) {
         ],
         dest: 'html/assets/app/js/application.js'
       }
+    },
+    uglify: {
+      options: {
+        compress: {
+          warnings: false
+        },
+        preserveComments: 'some'
+      },
+      core: {
+        src: '<%= concat.core.dest %>',
+        dest: 'html/assets/app/js/application.min.js'
+      }
     }
   });
 };
