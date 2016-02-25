@@ -71,6 +71,17 @@ module.exports = function (grunt) {
         configFile: 'js/.eslintrc'
       },
       target: 'js/*.js'
+    },
+    jscs: {
+      options: {
+        config: 'js/.jscsrc'
+      },
+      grunt: {
+        src: 'Gruntfile.js'
+      },
+      core: {
+        src: 'js/*.js'
+      }
     }
   });
 };
