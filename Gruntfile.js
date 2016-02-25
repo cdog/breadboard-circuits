@@ -102,6 +102,23 @@ module.exports = function (grunt) {
         src: '<%= concat.core.dest %>',
         dest: 'html/assets/app/js/application.min.js'
       }
+    },
+    copy: {
+      assets: {
+        expand: true,
+        src: 'assets/**',
+        dest: 'html'
+      },
+      packages: {
+        files: [
+          {
+            expand: true,
+            cwd: 'node_modules/jquery/dist',
+            src: '*',
+            dest: 'html/assets/vendor/jquery'
+          }
+        ]
+      }
     }
   });
 };
