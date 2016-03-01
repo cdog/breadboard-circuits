@@ -18,7 +18,6 @@ $ grunt deploy # push last build to the gh-pages branch
 * build _(default)_
 * clean
 * deploy
-* docs
 * serve
 * test
 * watch
