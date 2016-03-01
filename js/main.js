@@ -157,7 +157,7 @@
   var line2;
   var line3;
 
-  $.when.apply($, loadComponents()).then(function (status) {
+  $.when.apply($, loadComponents()).then(function () {
     var node;
 
     node = group.node().appendChild(components.breadboard);
@@ -236,7 +236,7 @@
     }).hide();
   });
 
-  var codeEditor = ace.edit('code-editor');
+  ace.edit('code-editor');
 
   $('#reset-view').click(function (event) {
     event.preventDefault();
