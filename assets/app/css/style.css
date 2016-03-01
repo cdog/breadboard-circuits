@@ -1,0 +1,67 @@
+.navbar-default {
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .075);
+  background-color: #fff;
+          box-shadow: 0 1px 5px rgba(0, 0, 0, .075);
+}
+.navbar-static-top {
+  border-bottom-width: 0;
+}
+.navbar-nav > li > a {
+  outline: 0;
+}
+.thumbnail:hover {
+  text-decoration: none;
+}
+.thumbnail .caption {
+  border-top: 1px solid #eee;
+  font-size: 16px;
+  margin: 4px -4px -4px;
+  overflow: hidden;
+  padding: 8px 4px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#viewport {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 50px;
+}
+#canvas {
+  background-color: #f8f8f8;
+  display: block;
+}
+#modal-code-editor .modal-body {
+  height: 480px;
+}
+#code-editor {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#pushbutton {
+  cursor: pointer;
+}
+.editing .component {
+  cursor: move !important;
+}
+.component.dragging {
+  opacity: .75;
+}
+#light-bulb.off .light-bulb-st3 {
+  fill: transparent;
+}
+#light-bulb.off .light-bulb-st4 {
+  stroke: #888;
+}
+#light-bulb.off .light-bulb-st5 {
+  display: none;
+}
+#pushbutton.pressed .pushbutton-st2 {
+  display: none;
+}
+/*# sourceMappingURL=style.css.map */
