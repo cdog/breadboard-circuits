@@ -222,6 +222,9 @@ module.exports = function (grunt) {
       }
     },
     clean: {
+      options: {
+        force: true
+      },
       assets: 'html/assets',
       dist: 'dist'
     }
