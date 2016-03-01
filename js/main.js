@@ -76,10 +76,10 @@
   function loadComponents() {
     var dfd = [];
 
-    dfd.push(loadComponent('assets/img/components/aa-battery.svg', 'aaBattery'));
-    dfd.push(loadComponent('assets/img/components/breadboard.svg', 'breadboard'));
-    dfd.push(loadComponent('assets/img/components/light-bulb.svg', 'lightBulb'));
-    dfd.push(loadComponent('assets/img/components/pushbutton.svg', 'pushbutton'));
+    dfd.push(loadComponent('assets/app/img/components/aa-battery.svg', 'aaBattery'));
+    dfd.push(loadComponent('assets/app/img/components/breadboard.svg', 'breadboard'));
+    dfd.push(loadComponent('assets/app/img/components/light-bulb.svg', 'lightBulb'));
+    dfd.push(loadComponent('assets/app/img/components/pushbutton.svg', 'pushbutton'));
 
     return dfd;
   }
