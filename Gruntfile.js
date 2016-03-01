@@ -120,7 +120,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: 'node_modules/bootstrap/dist',
-            src: '*',
+            src: '**',
             dest: 'html/assets/vendor/bootstrap'
           },
           {
