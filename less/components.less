@@ -1,0 +1,37 @@
+.editing {
+  .component {
+    cursor: move !important;
+  }
+}
+
+.component {
+  &.dragging {
+    opacity: 0.75;
+  }
+}
+
+#light-bulb {
+  &.off {
+    .light-bulb-st3 {
+      fill: transparent;
+    }
+
+    .light-bulb-st4 {
+      stroke: #888;
+    }
+
+    .light-bulb-st5 {
+      display: none;
+    }
+  }
+}
+
+#pushbutton {
+  cursor: pointer;
+
+  &.pressed {
+    .pushbutton-st2 {
+      display: none;
+    }
+  }
+}
