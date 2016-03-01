@@ -4,6 +4,10 @@
     "jquery": true
   },
   "extends": "eslint:recommended",
+  "globals": {
+    "ace": false,
+    "d3": false
+  },
   "parser": "babel-eslint",
   "root": true
 }
