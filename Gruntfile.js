@@ -150,11 +150,13 @@ module.exports = function (grunt) {
       build: {},
       serve: {
         options: {
+          incremental: true,
           serve: true
         }
       },
       watch: {
         options: {
+          incremental: true,
           watch: true
         }
       }
