@@ -288,4 +288,43 @@
         });
     }
   });
+
+  $.get('assets/vendor/fritzing-parts/bins/core.fzb', function (data) {
+    var xml = $.parseXML(data);
+    var $xml = $(xml);
+    var library = [];
+
+    $xml.find('instance').each(function () {
+      var $this = $(this);
+      var category;
+      var n;
+      var id = $(this).attr('moduleIdRef');
+
+      if (n = library.length) {
+        category = library[n - 1];
+      }
+
+      if (id == '__spacer__') {
+        category = {
+          components: []
+        };
+
+        category.name = $(this).attr('path');
+
+        library.push(category);
+      } else {
+        var path;
+
+        if (path = $(this).attr('path')) {
+          category.components.push(path.split('/').pop());
+        } else {
+          category.components.push(id + '.fzb');
+        }
+      }
+    });
+
+    for (var i = 0; i < library.length; i++) {
+      console.log(library[i]);
+    }
+  });
 })(jQuery);
