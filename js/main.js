@@ -331,5 +331,31 @@
     var html = template(context);
 
     $('#categories-template').after(html);
+
+    var deferreds = [];
+
+    for (var i = 0; i < library.categories[0].components.length; i++) {
+      deferreds.push((function (i) {
+        return $.get('assets/vendor/fritzing-parts/core/' + library.categories[0].components[i], function (data) {
+          var xml = $.parseXML(data);
+          var $xml = $(xml);
+          var component = {
+            title: $xml.find('title').text(),
+            icon: 'assets/vendor/fritzing-parts/svg/core/' + $xml.find('iconView > layers').attr('image')
+          };
+
+          library.categories[0].components[i] = component;
+        });
+      })(i));
+    }
+
+    $.when.apply(null, deferreds).always(function () {
+      var source = $('#components-template').html();
+      var template = Handlebars.compile(source);
+      var context = library.categories[0];
+      var html = template(context);
+
+      $('#components-template').after(html);
+    });
   });
 })(jQuery);
