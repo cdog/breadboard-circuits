@@ -131,6 +131,12 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
+            cwd: 'node_modules/handlebars/dist',
+            src: '*',
+            dest: 'html/assets/vendor/handlebars'
+          },
+          {
+            expand: true,
             cwd: 'node_modules/jquery/dist',
             src: '*',
             dest: 'html/assets/vendor/jquery'
