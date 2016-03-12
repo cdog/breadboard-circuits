@@ -18,8 +18,8 @@
                   {{#each categories}}
                     <li {{#if @first}} class="active" {{/if}} role="presentation">
                       <a href="#">
-                        <span class="badge pull-right">{{this.components.length}}</span>
-                        {{this.name}}
+                        <span class="badge pull-right">{{components.length}}</span>
+                        {{name}}
                       </a>
                     </li>
                   {{/each}}
@@ -30,18 +30,24 @@
           <div class="col-xs-8 col-md-9">
             {% raw %}
               <script id="components-template" type="text/x-handlebars-template">
-                <div id="components" class="row">
-                  {{#each components}}
-                    <div class="col-xs-6 col-md-4">
-                      <a class="thumbnail" href="#">
-                        <div class="embed-responsive embed-responsive-16by9">
-                          <img class="embed-responsive-item" src="{{this.icon}}" alt="{{this.title}}">
-                        </div>
-                        <h3 class="caption">{{this.title}}</h3>
-                      </a>
-                    </div>
-                  {{/each}}
-                </div>
+                {{#each categories}}
+                  <div id="components" class="row">
+                    {{#each components}}
+                      <div class="col-xs-6 col-md-4">
+                        <a class="thumbnail" href="#">
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <div class="embed-responsive-item" {{#if icon}} style="background-image: url('{{icon}}');" {{/if}}>
+                              {{#if error}}
+                                <span class="text-danger">{{error}}</span>
+                              {{/if}}
+                            </div>
+                          </div>
+                          <h3 class="caption">{{title}}</h3>
+                        </a>
+                      </div>
+                    {{/each}}
+                  </div>
+                {{/each}}
               </script>
             {% endraw %}
           </div><!-- .col-xs-8 .col-md-9 -->
