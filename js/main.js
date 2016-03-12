@@ -292,7 +292,9 @@
   $.get('assets/vendor/fritzing-parts/bins/core.fzb', function (data) {
     var xml = $.parseXML(data);
     var $xml = $(xml);
-    var library = [];
+    var library = {
+      categories: []
+    };
 
     $xml.find('instance').each(function () {
       var $this = $(this);
@@ -300,8 +302,8 @@
       var n;
       var id = $(this).attr('moduleIdRef');
 
-      if (n = library.length) {
-        category = library[n - 1];
+      if (n = library.categories.length) {
+        category = library.categories[n - 1];
       }
 
       if (id == '__spacer__') {
@@ -311,7 +313,7 @@
 
         category.name = $(this).attr('path');
 
-        library.push(category);
+        library.categories.push(category);
       } else {
         var path;
 
@@ -323,8 +325,11 @@
       }
     });
 
-    for (var i = 0; i < library.length; i++) {
-      console.log(library[i]);
-    }
+    var source = $('#categories-template').html();
+    var template = Handlebars.compile(source);
+    var context = library;
+    var html = template(context);
+
+    $('#categories-template').after(html);
   });
 })(jQuery);
