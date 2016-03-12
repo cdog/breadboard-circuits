@@ -28,80 +28,22 @@
             {% endraw %}
           </div><!-- .col-xs-4 .col-md-3 -->
           <div class="col-xs-8 col-md-9">
-            <div id="components" class="row">
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="http://placehold.it/256x192/f8f8f8/999" alt="">
-                  <h3 class="caption">7 Segment Display</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="http://placehold.it/256x192/f8f8f8/999" alt="">
-                  <h3 class="caption">9V Battery</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="assets/app/img/components/aa-battery.png" alt="">
-                  <h3 class="caption">AA Battery</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="http://placehold.it/256x192/f8f8f8/999" alt="">
-                  <h3 class="caption">Arduino Uno</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="assets/app/img/components/breadboard.png" alt="">
-                  <h3 class="caption">Breadboard</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="http://placehold.it/256x192/f8f8f8/999" alt="">
-                  <h3 class="caption">LED</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="http://placehold.it/256x192/f8f8f8/999" alt="">
-                  <h3 class="caption">LED RGB</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="assets/app/img/components/light-bulb.png" alt="">
-                  <h3 class="caption">Light bulb</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="http://placehold.it/256x192/f8f8f8/999" alt="">
-                  <h3 class="caption">Power Supply</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="assets/app/img/components/pushbutton.png" alt="">
-                  <h3 class="caption">Pushbutton</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="http://placehold.it/256x192/f8f8f8/999" alt="">
-                  <h3 class="caption">Resistor</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-              <div class="col-xs-6 col-md-4">
-                <a class="thumbnail" href="#">
-                  <img src="http://placehold.it/256x192/f8f8f8/999" alt="">
-                  <h3 class="caption">Slideswitch</h3>
-                </a><!-- .thumbnail -->
-              </div><!-- .col-xs-6 .col-md-4 -->
-            </div><!-- #components .row -->
+            {% raw %}
+              <script id="components-template" type="text/x-handlebars-template">
+                <div id="components" class="row">
+                  {{#each components}}
+                    <div class="col-xs-6 col-md-4">
+                      <a class="thumbnail" href="#">
+                        <div class="embed-responsive embed-responsive-16by9">
+                          <img class="embed-responsive-item" src="{{this.icon}}" alt="{{this.title}}">
+                        </div>
+                        <h3 class="caption">{{this.title}}</h3>
+                      </a>
+                    </div>
+                  {{/each}}
+                </div>
+              </script>
+            {% endraw %}
           </div><!-- .col-xs-8 .col-md-9 -->
         </div><!-- .row -->
       </div><!-- .modal-body -->
