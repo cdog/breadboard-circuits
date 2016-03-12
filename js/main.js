@@ -289,6 +289,27 @@
     }
   });
 
+  $.whenAllDone = function () {
+    var dfds = [];
+    var result = $.Deferred();
+
+    $.each(arguments, function (i, dfd) {
+      var cdfd = $.Deferred();
+
+      dfd.always(function () {
+        cdfd.resolve();
+      });
+
+      dfds.push(cdfd.promise());
+    });
+
+    $.when.apply(null, dfds).always(function () {
+      return result.resolve();
+    });
+
+    return result.promise();
+  };
+
   $.get('assets/vendor/fritzing-parts/bins/core.fzb', function (data) {
     var xml = $.parseXML(data);
     var $xml = $(xml);
@@ -325,35 +346,47 @@
       }
     });
 
-    var source = $('#categories-template').html();
-    var template = Handlebars.compile(source);
-    var context = library;
-    var html = template(context);
-
-    $('#categories-template').after(html);
-
     var deferreds = [];
 
-    for (var i = 0; i < library.categories[0].components.length; i++) {
-      deferreds.push((function (i) {
-        return $.get('assets/vendor/fritzing-parts/core/' + library.categories[0].components[i], function (data) {
-          var xml = $.parseXML(data);
-          var $xml = $(xml);
-          var component = {
-            title: $xml.find('title').text(),
-            icon: 'assets/vendor/fritzing-parts/svg/core/' + $xml.find('iconView > layers').attr('image')
-          };
+    for (var i = 0; i < library.categories.length; i++) {
+      for (var j = 0; j < library.categories[i].components.length; j++) {
+        deferreds.push((function (i, j) {
+          return $.get('assets/vendor/fritzing-parts/core/' + library.categories[i].components[j], function (data) {
+            var component = {};
 
-          library.categories[0].components[i] = component;
-        });
-      })(i));
+            try {
+              var xml = $.parseXML(data);
+              var $xml = $(xml);
+
+              component.title = $xml.find('title').text();
+              component.icon = 'assets/vendor/fritzing-parts/svg/core/' + $xml.find('iconView > layers').attr('image');
+            } catch (e) {
+              component.title = library.categories[i].components[j];
+              component.error = 'parse error';
+            }
+
+            library.categories[i].components[j] = component;
+          }).fail(function () {
+            library.categories[i].components[j] = {
+              title: library.categories[i].components[j],
+              error: 'not found'
+            };
+          });
+        })(i, j));
+      }
     }
 
-    $.when.apply(null, deferreds).always(function () {
-      var source = $('#components-template').html();
+    $.whenAllDone.apply(null, deferreds).always(function () {
+      var source = $('#categories-template').html();
       var template = Handlebars.compile(source);
-      var context = library.categories[0];
+      var context = library;
       var html = template(context);
+
+      $('#categories-template').after(html);
+
+      source = $('#components-template').html();
+      template = Handlebars.compile(source);
+      html = template(context);
 
       $('#components-template').after(html);
     });
