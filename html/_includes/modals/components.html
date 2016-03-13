@@ -27,27 +27,31 @@
               </script>
             {% endraw %}
           </div><!-- .col-xs-4 .col-md-3 -->
-          <div class="col-xs-8 col-md-9">
+          <div class="col-xs-8 col-md-9 component-library">
             {% raw %}
               <script id="components-template" type="text/x-handlebars-template">
-                {{#each categories}}
-                  <div id="components" class="row">
-                    {{#each components}}
-                      <div class="col-xs-6 col-md-4">
-                        <a class="thumbnail" href="#">
-                          <div class="embed-responsive embed-responsive-16by9">
-                            <div class="embed-responsive-item" {{#if icon}} style="background-image: url('{{icon}}');" {{/if}}>
-                              {{#if error}}
-                                <span class="text-danger">{{error}}</span>
-                              {{/if}}
-                            </div>
+                <div class="tab-content">
+                  {{#each categories}}
+                    <div role="tabpanel" class="tab-pane fade {{#if @first}} in active {{/if}}" id="category-{{@index}}">
+                      <div class="row">
+                        {{#each components}}
+                          <div class="col-xs-6 col-md-4 component-library-item">
+                            <a class="thumbnail" href="#">
+                              <div class="embed-responsive embed-responsive-16by9">
+                                <div class="embed-responsive-item" {{#if icon}} style="background-image: url('{{icon}}');" {{/if}}>
+                                  {{#if error}}
+                                    <span class="text-danger">{{error}}</span>
+                                  {{/if}}
+                                </div>
+                              </div>
+                              <h3 class="caption">{{title}}</h3>
+                            </a>
                           </div>
-                          <h3 class="caption">{{title}}</h3>
-                        </a>
+                        {{/each}}
                       </div>
-                    {{/each}}
-                  </div>
-                {{/each}}
+                    </div>
+                  {{/each}}
+                </div>
               </script>
             {% endraw %}
           </div><!-- .col-xs-8 .col-md-9 -->

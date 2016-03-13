@@ -231,7 +231,7 @@
   $('#field-search').keyup(function () {
     var needle = $(this).val().toLowerCase();
 
-    $('#components > div').show().filter(function () {
+    $('.component-library .component-library-item').show().filter(function () {
       return $('.caption', this).text().trim().toLowerCase().indexOf(needle) === -1;
     }).hide();
   });
