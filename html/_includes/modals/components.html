@@ -14,10 +14,10 @@
             <hr>
             {% raw %}
               <script id="categories-template" type="text/x-handlebars-template">
-                <ul class="nav nav-pills nav-stacked">
+                <ul class="nav nav-pills nav-stacked" role="tablist">
                   {{#each categories}}
-                    <li {{#if @first}} class="active" {{/if}} role="presentation">
-                      <a href="#">
+                    <li role="presentation" {{#if @first}} class="active" {{/if}}>
+                      <a href="#category-{{@index}}" aria-controls="category-{{@index}}" role="tab" data-toggle="tab">
                         <span class="badge pull-right">{{components.length}}</span>
                         {{name}}
                       </a>
