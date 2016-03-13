@@ -42,6 +42,16 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.embed-responsive {
+  background-color: #f8f8f8;
+}
+.embed-responsive .embed-responsive-item {
+  background-origin: content-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 15px;
+}
 .editing .component {
   cursor: move !important;
 }
