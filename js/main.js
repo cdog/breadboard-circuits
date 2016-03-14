@@ -419,9 +419,11 @@
       var html = template(context);
 
       $('#component-overview-template').after(html);
+      $('#component-inspector').addClass('active');
     },
     mouseleave: function () {
-      $('#component-inspector').remove();
+      $('#component-overview').remove();
+      $('#component-inspector').removeClass('active');
     }
   }, '.thumbnail');
 })(jQuery);
