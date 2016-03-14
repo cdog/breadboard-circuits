@@ -59,42 +59,44 @@
             {% endraw %}
           </div><!-- .col-xs-8 .col-md-9 -->
           <div class="col-xs-4 col-md-3">
-            <div class="well well-lg text-center">
-              <span class="glyphicon glyphicon-eye-open glyphicon-lg text-muted"></span>
-              <h4>Component Inspector</h4>
-              <p>Hover over a thumbnail to inspect a component.</p>
-            </div>
-            {% raw %}
-              <script id="component-overview-template" type="text/x-handlebars-template">
-                <div id="component-inspector">
-                  <h4>{{title}}</h4>
-                  <p>{{description}}</p>
-                  <table class="table">
-                    <caption>Properties</caption>
-                    <tbody>
-                      {{#each properties as |value property|}}
+            <div id="component-inspector">
+              <div class="well well-lg text-center placeholder">
+                <span class="glyphicon glyphicon-flash glyphicon-lg text-muted"></span>
+                <h4>Component Inspector</h4>
+                <p>Hover over a thumbnail to inspect a component.</p>
+              </div>
+              {% raw %}
+                <script id="component-overview-template" type="text/x-handlebars-template">
+                  <div id="component-overview">
+                    <h4>{{title}}</h4>
+                    <p>{{description}}</p>
+                    <table class="table">
+                      <caption>Properties</caption>
+                      <tbody>
+                        {{#each properties as |value property|}}
+                          <tr>
+                            <td>{{property}}</td>
+                            <td>{{value}}</td>
+                          </tr>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                    <table class="table">
+                      <caption>Tags</caption>
+                      <tbody>
                         <tr>
-                          <td>{{property}}</td>
-                          <td>{{value}}</td>
+                          <td>
+                            {{#each tags}}
+                              <span class="label label-default">{{this}}</span>
+                            {{/each}}
+                          </td>
                         </tr>
-                      {{/each}}
-                    </tbody>
-                  </table>
-                  <table class="table">
-                    <caption>Tags</caption>
-                    <tbody>
-                      <tr>
-                        <td>
-                          {{#each tags}}
-                            <span class="label label-default">{{this}}</span>
-                          {{/each}}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </script><!-- #component-overview-template -->
-            {% endraw %}
+                      </tbody>
+                    </table>
+                  </div>
+                </script><!-- #component-overview-template -->
+              {% endraw %}
+            </div>
           </div><!-- .col-xs-4 .col-md-3 -->
         </div><!-- .row -->
       </div><!-- .modal-body -->
