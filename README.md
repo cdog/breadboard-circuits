@@ -10,7 +10,7 @@ $ npm install
 $ grunt build
 $ grunt serve # open http://127.0.0.1:4000/ in your browser
 $ grunt clean && grunt build --environment production
-$ grunt deploy # push last build to the gh-pages branch
+$ grunt deploy # push an existing build to gh-pages branch
 ```
 
 ### Available grunt tasks
