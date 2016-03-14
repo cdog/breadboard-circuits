@@ -52,6 +52,12 @@
   background-size: contain;
   padding: 15px;
 }
+@media (min-width: 768px) {
+  .modal-fluid {
+    margin: 30px;
+    width: auto;
+  }
+}
 .editing .component {
   cursor: move !important;
 }

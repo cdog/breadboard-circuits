@@ -310,12 +310,13 @@
     return result.promise();
   };
 
+  var library = {
+    categories: []
+  };
+
   $.get('assets/vendor/fritzing-parts/bins/core.fzb', function (data) {
     var xml = $.parseXML(data);
     var $xml = $(xml);
-    var library = {
-      categories: []
-    };
 
     $xml.find('instance').each(function () {
       var $this = $(this);
@@ -358,8 +359,23 @@
               var xml = $.parseXML(data);
               var $xml = $(xml);
 
-              component.title = $xml.find('title').text();
-              component.icon = 'assets/vendor/fritzing-parts/svg/core/' + $xml.find('iconView > layers').attr('image');
+              component.title = $xml.find('module > title').text();
+              component.icon = 'assets/vendor/fritzing-parts/svg/core/' + $xml.find('module > views > iconView > layers').attr('image');
+              component.description = $xml.find('module > description').text();
+              component.properties = {};
+
+              $xml.find('module > properties > property').each(function () {
+                var $this = $(this);
+                var key = $this.attr('name').toLowerCase();
+
+                component.properties[key] = $this.text().toLowerCase();
+              });
+
+              component.tags = [];
+
+              $xml.find('module > tags > tag').each(function () {
+                component.tags.push($(this).text().toLowerCase());
+              });
             } catch (e) {
               component.title = library.categories[i].components[j];
               component.error = 'parse error';
@@ -391,4 +407,21 @@
       $('#components-template').after(html);
     });
   });
+
+  $('.component-library').on({
+    mouseenter: function () {
+      var $this = $(this);
+      var i = $this.data('category');
+      var j = $this.data('id');
+      var source = $('#component-overview-template').html();
+      var template = Handlebars.compile(source);
+      var context = library.categories[i].components[j];
+      var html = template(context);
+
+      $('#component-overview-template').after(html);
+    },
+    mouseleave: function () {
+      $('#component-inspector').remove();
+    }
+  }, '.thumbnail');
 })(jQuery);
