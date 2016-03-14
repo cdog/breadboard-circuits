@@ -342,7 +342,7 @@
         if (path = $(this).attr('path')) {
           category.components.push(path.split('/').pop());
         } else {
-          category.components.push(id + '.fzb');
+          category.components.push(id + '.fzp');
         }
       }
     });
