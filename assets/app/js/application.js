@@ -321,10 +321,10 @@
     $xml.find('instance').each(function () {
       var $this = $(this);
       var category;
-      var n;
-      var id = $(this).attr('moduleIdRef');
+      var n = library.categories.length;
+      var id = $this.attr('moduleIdRef');
 
-      if (n = library.categories.length) {
+      if (n) {
         category = library.categories[n - 1];
       }
 
@@ -333,13 +333,13 @@
           components: []
         };
 
-        category.name = $(this).attr('path');
+        category.name = $this.attr('path');
 
         library.categories.push(category);
       } else {
-        var path;
+        var path = $this.attr('path');
 
-        if (path = $(this).attr('path')) {
+        if (path) {
           category.components.push(path.split('/').pop());
         } else {
           category.components.push(id + '.fzp');
