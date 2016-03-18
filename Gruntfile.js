@@ -193,10 +193,6 @@ module.exports = function (grunt) {
         },
         files: ['Gruntfile.js', 'package.json']
       },
-      assets: {
-        files: 'assets/**',
-        tasks: 'copy:assets'
-      },
       html: {
         files: 'dist/**/*.html',
         tasks: ['htmllint', 'htmlmin']
