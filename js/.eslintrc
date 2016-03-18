@@ -6,7 +6,8 @@
   "extends": "eslint:recommended",
   "globals": {
     "ace": false,
-    "d3": false
+    "d3": false,
+    "Handlebars": false
   },
   "parser": "babel-eslint",
   "root": true
