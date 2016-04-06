@@ -175,7 +175,10 @@ module.exports = function (grunt) {
       }
     },
     htmllint: {
-      src: 'dist/**/*.html'
+      src: [
+        'dist/**/*.html',
+        '!dist/log/*.html'
+      ]
     },
     _htmlmin: {
       dist: {
