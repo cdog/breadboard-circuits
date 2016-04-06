@@ -265,6 +265,21 @@ module.exports = function migrate(grunt) {
         });
       }
 
+      // Delete empty bins
+      bins = bins.filter(function (part) {
+        if (part.type === 'group') {
+          if (part.parts.length === 0) {
+            log(part.title + ': Empty bin');
+
+            return false;
+          }
+
+          return true;
+        }
+
+        return true;
+      });
+
       inspect(util.inspect(bins, { depth: null }));
     }).then(function () {
       done();
