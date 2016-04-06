@@ -221,6 +221,33 @@ module.exports = function migrate(grunt) {
     Q.fcall(loadBins, options.src + '/bins').then(function () {
       return loadParts(options.src + '/core');
     }).then(function () {
+      // Delete unreferenced parts
+      for (var bin of bins) {
+        bin.parts = bin.parts.filter(function (part) {
+          if (part.type === 'group') {
+            part.parts = part.parts.filter(function (p) {
+              if (p.source === undefined) {
+                error(part.title + ': No source found: ' + p.id);
+
+                return false;
+              }
+
+              return true;
+            });
+
+            return true;
+          }
+
+          if (part.source === undefined) {
+            error(bin.title + ': No source found: ' + part.id);
+
+            return false;
+          }
+
+          return true;
+        });
+      }
+    }).then(function () {
       done();
     }).done();
   });
