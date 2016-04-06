@@ -102,6 +102,10 @@ module.exports = function migrate(grunt) {
     return deferred.promise;
   }
 
+  function findPart(id) {
+    return _findPart(bins, id);
+  }
+
   function loadPart(path) {
     var parser = new xml2js.Parser();
     var deferred = Q.defer();
