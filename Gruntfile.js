@@ -11,6 +11,12 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    migrate: {
+      parts: {
+        dest: 'assets/vendor/fritzing-parts',
+        src: 'fritzing-parts'
+      }
+    },
     less: {
       core: {
         options: {
