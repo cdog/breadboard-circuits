@@ -128,6 +128,10 @@ module.exports = function migrate(grunt) {
     part.connectors = data.module.connectors[0].connector; // TODO: Preprocess connectors data
     part.tags = data.module.tags[0].tag;
     part.title = data.module.title[0];
+    part.views = {
+      breadboard: data.module.views[0].breadboardView[0].layers[0].$.image.split('/').pop(),
+      icon: data.module.views[0].iconView[0].layers[0].$.image.split('/').pop()
+    };
   }
 
   function loadPart(path) {
