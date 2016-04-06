@@ -136,6 +136,10 @@ module.exports = function migrate(grunt) {
     if (data.module.description !== undefined) {
       part.description = data.module.description[0];
     }
+
+    if (data.module.label !== undefined) {
+      part.label = data.module.label[0];
+    }
   }
 
   function loadPart(path) {
