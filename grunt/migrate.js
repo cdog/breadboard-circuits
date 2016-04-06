@@ -119,6 +119,15 @@ module.exports = function migrate(grunt) {
 
         var part = findPart(result.module.$.moduleId);
 
+        // Skip unreferenced modules
+        if (part === false) {
+          error(path + ': Reference not found: ' + result.module.$.moduleId);
+
+          deferred.resolve();
+
+          return deferred.promise;
+        }
+
         part.source = path;
 
         updatePart(part, result);
