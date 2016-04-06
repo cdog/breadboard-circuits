@@ -285,6 +285,8 @@ module.exports = function migrate(grunt) {
       sanitizeParts();
 
       inspect(util.inspect(bins, { depth: null }));
+
+      fs.writeFileSync(options.dest + '/parts.json', JSON.stringify(bins));
     }).then(function () {
       done();
     }).done();
