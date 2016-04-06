@@ -35,6 +35,7 @@
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "babel-eslint": "^4.1.8",
+    "debug": "^2.2.0",
     "grunt": "^0.4.5",
     "grunt-babel": "^6.0.0",
     "grunt-build-control": "^0.6.3",
@@ -57,7 +58,9 @@
     "grunt-jscs": "^2.8.0",
     "grunt-postcss": "^0.7.2",
     "jit-grunt": "^0.9.1",
-    "time-grunt": "^1.2.2"
+    "q": "^1.4.1",
+    "time-grunt": "^1.2.2",
+    "xml2js": "^0.4.16"
   },
   "private": true
 }
