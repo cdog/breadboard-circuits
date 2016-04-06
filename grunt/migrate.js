@@ -247,6 +247,8 @@ module.exports = function migrate(grunt) {
           return true;
         });
       }
+
+      inspect(util.inspect(bins, { depth: null }));
     }).then(function () {
       done();
     }).done();
