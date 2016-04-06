@@ -132,6 +132,10 @@ module.exports = function migrate(grunt) {
       breadboard: data.module.views[0].breadboardView[0].layers[0].$.image.split('/').pop(),
       icon: data.module.views[0].iconView[0].layers[0].$.image.split('/').pop()
     };
+
+    if (data.module.description !== undefined) {
+      part.description = data.module.description[0];
+    }
   }
 
   function loadPart(path) {
