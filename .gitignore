@@ -1,3 +1,6 @@
+# Migration source
+/fritzing-parts
+
 # Build generated files
 /dist
 /html/assets
