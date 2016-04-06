@@ -99,6 +99,21 @@ module.exports = function migrate(grunt) {
     return deferred.promise;
   }
 
+  function loadParts(path) {
+    var deferred = Q.defer();
+    var promises = [];
+
+    readdir(path, false, 'fzp').forEach(function (file) {
+      promises.push(loadPart(file));
+    });
+
+    Q.all(promises).then(function () {
+      deferred.resolve();
+    }).done();
+
+    return deferred.promise;
+  }
+
   grunt.registerMultiTask('migrate', function () {
     options = this.data;
 
