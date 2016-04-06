@@ -1,6 +1,10 @@
 'use strict';
 
 var fs = require('fs');
+var debug = require('debug');
+var error = debug('migrate:error');
+var inspect = debug('migrate:inspect');
+var log = debug('migrate:log');
 
 module.exports = function migrate(grunt) {
   var options = {};
