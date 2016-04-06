@@ -22,6 +22,17 @@ $ git clone https://github.com/fritzing/fritzing-parts.git
 $ grunt migrate
 ```
 
+Before running a migration make sure the `migrate` task (see `Gruntfile.js`) is configured properly:
+
+```
+migrate: {
+  parts: {
+    src: 'fritzing-parts', // migration source data
+    dest: 'assets/app/parts' // migrated data
+  }
+}
+```
+
 ### Available grunt tasks
 
 * build _(default)_
