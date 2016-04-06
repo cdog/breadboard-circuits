@@ -126,6 +126,7 @@ module.exports = function migrate(grunt) {
 
   function updatePart(part, data) {
     part.connectors = data.module.connectors[0].connector; // TODO: Preprocess connectors data
+    part.properties = [];
     part.tags = data.module.tags[0].tag;
     part.title = data.module.title[0];
     part.views = {
@@ -139,6 +140,24 @@ module.exports = function migrate(grunt) {
 
     if (data.module.label !== undefined) {
       part.label = data.module.label[0];
+    }
+
+    var properties = data.module.properties[0].property;
+
+    for (var i = 0; i < properties.length; i++) {
+      var property = {
+        name: properties[i].$.name
+      }
+
+      if (properties[i]._ !== undefined) {
+        property.value = properties[i]._;
+      }
+
+      if (properties[i].$.showInLabel !== undefined) {
+        property.show = properties[i].$.showInLabel === 'yes';
+      }
+
+      part.properties.push(property);
     }
   }
 
