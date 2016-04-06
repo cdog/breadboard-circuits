@@ -105,6 +105,8 @@ module.exports = function migrate(grunt) {
     var done = this.async();
 
     Q.fcall(loadBins, options.src + '/bins').then(function () {
+      return loadParts(options.src + '/core');
+    }).then(function () {
       done();
     }).done();
   });
