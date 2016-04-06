@@ -1,6 +1,9 @@
 'use strict';
 
 var fs = require('fs');
+var xml2js = require('xml2js');
+var util = require('util');
+var Q = require('q');
 var debug = require('debug');
 var error = debug('migrate:error');
 var inspect = debug('migrate:inspect');
@@ -95,6 +98,23 @@ module.exports = function migrate(grunt) {
     Q.all(promises).then(function () {
       deferred.resolve();
     }).done();
+
+    return deferred.promise;
+  }
+
+  function loadPart(path) {
+    var parser = new xml2js.Parser();
+    var deferred = Q.defer();
+
+    fs.readFile(path, function (err, data) {
+      parser.parseString(data, function (err, result) {
+        part.source = path;
+
+        updatePart(part, result);
+
+        deferred.resolve();
+      });
+    });
 
     return deferred.promise;
   }
