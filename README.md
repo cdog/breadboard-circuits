@@ -13,6 +13,15 @@ $ grunt clean && grunt build --environment production
 $ grunt deploy # push an existing build to gh-pages branch
 ```
 
+### Migrating data
+
+Migrated data is already included in this repository. To run a migration clone the [fritzing-parts](https://github.com/fritzing/fritzing-parts) repository first then run Grunt `migrate` task:
+
+```
+$ git clone https://github.com/fritzing/fritzing-parts.git
+$ grunt migrate
+```
+
 ### Available grunt tasks
 
 * build _(default)_
