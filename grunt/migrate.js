@@ -248,6 +248,23 @@ module.exports = function migrate(grunt) {
         });
       }
 
+      // Delete empty groups
+      for (var bin of bins) {
+        bin.parts = bin.parts.filter(function (part) {
+          if (part.type === 'group') {
+            if (part.parts.length === 0) {
+              log(bin.title + ': ' + part.title + ': Empty group');
+
+              return false;
+            }
+
+            return true;
+          }
+
+          return true;
+        });
+      }
+
       inspect(util.inspect(bins, { depth: null }));
     }).then(function () {
       done();
