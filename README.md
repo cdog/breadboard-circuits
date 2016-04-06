@@ -35,10 +35,6 @@ migrate: {
 
 To debug a migration set the `DEBUG` environment variable to include all (`migrate:*`) or specific debug type messages (`inspect`, `error`, `log` are availalbe):
 
-error
-inspect
-log
-
 ```
 $ DEBUG=migrate:error,log grunt migrate # print error and log messages
 $ DEBUG=migrate:inspect grunt migrate # inspect migrated data
