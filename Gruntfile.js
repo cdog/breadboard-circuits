@@ -13,7 +13,7 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     migrate: {
       parts: {
-        dest: 'assets/vendor/fritzing-parts',
+        dest: 'assets/app/parts',
         src: 'fritzing-parts'
       }
     },

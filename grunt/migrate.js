@@ -1,6 +1,6 @@
 'use strict';
 
-var fs = require('fs');
+var fs = require('fs-extra');
 var xml2js = require('xml2js');
 var util = require('util');
 var Q = require('q');
@@ -286,6 +286,7 @@ module.exports = function migrate(grunt) {
 
       inspect(util.inspect(bins, { depth: null }));
 
+      fs.mkdirpSync(options.dest);
       fs.writeFileSync(options.dest + '/parts.json', JSON.stringify(bins));
     }).then(function () {
       done();
