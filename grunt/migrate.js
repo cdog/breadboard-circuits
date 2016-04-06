@@ -125,6 +125,8 @@ module.exports = function migrate(grunt) {
   }
 
   function updatePart(part, data) {
+    part.connectors = data.module.connectors[0].connector; // TODO: Preprocess connectors data
+    part.tags = data.module.tags[0].tag;
     part.title = data.module.title[0];
   }
 
