@@ -34,7 +34,28 @@ module.exports = function migrate(grunt) {
     return results;
   };
 
+  function loadBins(path) {
+    var deferred = Q.defer();
+    var promises = [];
+
+    readdir(path, true, 'fzb').forEach(function (file) {
+      promises.push(loadBin(file));
+    });
+
+    Q.all(promises).then(function () {
+      deferred.resolve();
+    }).done();
+
+    return deferred.promise;
+  }
+
   grunt.registerMultiTask('migrate', function () {
     options = this.data;
+
+    var done = this.async();
+
+    Q.fcall(loadBins, options.src + '/bins').then(function () {
+      done();
+    }).done();
   });
 };
