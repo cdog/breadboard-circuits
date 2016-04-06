@@ -213,63 +213,40 @@ module.exports = function migrate(grunt) {
     return deferred.promise;
   }
 
-  grunt.registerMultiTask('migrate', function () {
-    options = this.data;
-
-    var done = this.async();
-
-    Q.fcall(loadBins, options.src + '/bins').then(function () {
-      return loadParts(options.src + '/core');
-    }).then(function () {
-      // Delete unreferenced parts
-      for (var bin of bins) {
-        bin.parts = bin.parts.filter(function (part) {
-          if (part.type === 'group') {
-            part.parts = part.parts.filter(function (p) {
-              if (p.source === undefined) {
-                error(part.title + ': No source found: ' + p.id);
-
-                return false;
-              }
-
-              return true;
-            });
-
-            return true;
-          }
-
-          if (part.source === undefined) {
-            error(bin.title + ': No source found: ' + part.id);
-
-            return false;
-          }
-
-          return true;
-        });
-      }
-
-      // Delete empty groups
-      for (var bin of bins) {
-        bin.parts = bin.parts.filter(function (part) {
-          if (part.type === 'group') {
-            if (part.parts.length === 0) {
-              log(bin.title + ': ' + part.title + ': Empty group');
+  function sanitizeParts() {
+    // Delete unreferenced parts
+    for (var bin of bins) {
+      bin.parts = bin.parts.filter(function (part) {
+        if (part.type === 'group') {
+          part.parts = part.parts.filter(function (p) {
+            if (p.source === undefined) {
+              error(part.title + ': No source found: ' + p.id);
 
               return false;
             }
 
             return true;
-          }
+          });
 
           return true;
-        });
-      }
+        }
 
-      // Delete empty bins
-      bins = bins.filter(function (part) {
+        if (part.source === undefined) {
+          error(bin.title + ': No source found: ' + part.id);
+
+          return false;
+        }
+
+        return true;
+      });
+    }
+
+    // Delete empty groups
+    for (var bin of bins) {
+      bin.parts = bin.parts.filter(function (part) {
         if (part.type === 'group') {
           if (part.parts.length === 0) {
-            log(part.title + ': Empty bin');
+            log(bin.title + ': ' + part.title + ': Empty group');
 
             return false;
           }
@@ -279,6 +256,33 @@ module.exports = function migrate(grunt) {
 
         return true;
       });
+    }
+
+    // Delete empty bins
+    bins = bins.filter(function (part) {
+      if (part.type === 'group') {
+        if (part.parts.length === 0) {
+          log(part.title + ': Empty bin');
+
+          return false;
+        }
+
+        return true;
+      }
+
+      return true;
+    });
+  }
+
+  grunt.registerMultiTask('migrate', function () {
+    options = this.data;
+
+    var done = this.async();
+
+    Q.fcall(loadBins, options.src + '/bins').then(function () {
+      return loadParts(options.src + '/core');
+    }).then(function () {
+      sanitizeParts();
 
       inspect(util.inspect(bins, { depth: null }));
     }).then(function () {
