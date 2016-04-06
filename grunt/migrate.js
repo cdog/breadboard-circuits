@@ -8,6 +8,7 @@ var log = debug('migrate:log');
 
 module.exports = function migrate(grunt) {
   var options = {};
+  var bins = [];
 
   function readdir(path, recursive, ext) {
     var results = [];
@@ -33,6 +34,55 @@ module.exports = function migrate(grunt) {
 
     return results;
   };
+
+  function loadBin(path) {
+    var parser = new xml2js.Parser();
+    var deferred = Q.defer();
+
+    fs.readFile(path, function (err, data) {
+      parser.parseString(data, function (err, result) {
+        var bin = {
+          parts: [],
+          title: result.module.title,
+          type: 'group'
+        };
+
+        var instances = result.module.instances[0].instance;
+        var group;
+
+        instances.forEach(function (instance) {
+          if (instance.$.moduleIdRef === '__spacer__') {
+            if (group !== undefined) {
+              bin.parts.push(group);
+            }
+
+            group = {
+              parts: [],
+              title: instance.$.path,
+              type: 'group'
+            }
+          } else {
+            var part = {
+              id: instance.$.moduleIdRef,
+              type: 'part'
+            }
+
+            if (group !== undefined) {
+              group.parts.push(part);
+            } else {
+              bin.parts.push(part);
+            }
+          }
+        });
+
+        bins.push(bin);
+
+        deferred.resolve();
+      });
+    });
+
+    return deferred.promise;
+  }
 
   function loadBins(path) {
     var deferred = Q.defer();
