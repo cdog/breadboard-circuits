@@ -27,7 +27,7 @@ Before running a migration make sure the `migrate` task (see `Gruntfile.js`) is 
 ```
 migrate: {
   parts: {
-    src: 'fritzing-parts', // migration source data
+    src: 'fritzing-parts', // migration data source
     dest: 'assets/app/parts' // migrated data
   }
 }
