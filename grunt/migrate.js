@@ -102,6 +102,24 @@ module.exports = function migrate(grunt) {
     return deferred.promise;
   }
 
+  function _findPart(group, id) {
+    if (group instanceof Array) {
+      for (var i = 0; i < group.length; i++) {
+        var part = _findPart(group[i], id);
+
+        if (part !== false) {
+          return part;
+        }
+      }
+    }
+
+    if (group.type === 'group') {
+      return _findPart(group.parts, id);
+    }
+
+    return group.id === id ? group : false;
+  }
+
   function findPart(id) {
     return _findPart(bins, id);
   }
