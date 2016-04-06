@@ -108,6 +108,17 @@ module.exports = function migrate(grunt) {
 
     fs.readFile(path, function (err, data) {
       parser.parseString(data, function (err, result) {
+        // Skip files with parse erros
+        if (err !== null) {
+          error(path + ': ' + err);
+
+          deferred.resolve();
+
+          return deferred.promise;
+        }
+
+        var part = findPart(result.module.$.moduleId);
+
         part.source = path;
 
         updatePart(part, result);
