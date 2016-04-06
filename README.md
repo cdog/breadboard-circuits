@@ -33,7 +33,7 @@ migrate: {
 }
 ```
 
-To debug a migration set the `DEBUG` environment variable to include all (`migrate:*`) or specific debug messages (`inspect`, `error`, `log` types are available):
+To [log](http://cdog.github.io/breadboard-circuits/log/migrate.html) a migration set the `DEBUG` environment variable to include all (`migrate:*`) or specific debug messages (`inspect`, `error`, `log` types are available):
 
 ```
 $ DEBUG=migrate:error,log grunt migrate # print error and log messages
