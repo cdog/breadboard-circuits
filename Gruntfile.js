@@ -3,7 +3,8 @@ module.exports = function (grunt) {
 
   require('jit-grunt')(grunt, {
     buildcontrol: 'grunt-build-control',
-    htmllint: 'grunt-html'
+    htmllint: 'grunt-html',
+    migrate: 'grunt/migrate.js'
   });
 
   require('time-grunt')(grunt);
