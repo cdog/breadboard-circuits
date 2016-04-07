@@ -46,24 +46,22 @@ module.exports = function migrate(grunt) {
     fs.readFile(path, function (err, data) {
       parser.parseString(data, function (err, result) {
         var bin = {
-          icon: result.module.$.icon,
+          icon: result.module.$.icon.toLowerCase(),
           parts: [],
           title: result.module.title,
           type: 'group'
         };
 
         var dirname = Path.dirname(path);
-        var icon = dirname + '/' + bin.icon;
+        var iconPath = dirname + '/' + result.module.$.icon;
 
-        if (fs.existsSync(icon) === true) {
+        if (fs.existsSync(iconPath) === true) {
           var dest = options.dest + '/icons';
 
-          bin.icon = bin.icon.toLowerCase();
-
           fs.mkdirpSync(dest);
-          fs.copySync(icon, dest + '/' + bin.icon);
+          fs.copySync(iconPath, dest + '/' + bin.icon);
         } else {
-          error(path + ': File not found: ' + icon)
+          error(path + ': File not found: ' + iconPath)
 
           delete bin.icon;
         }
