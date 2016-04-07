@@ -1,3 +1,15 @@
+if (typeof window.Wyliodrin === 'undefined') {
+  window.Wyliodrin = {};
+}
+
+(function (Wyliodrin) {
+  'use strict';
+
+  Wyliodrin.breadboard = {
+    parts: []
+  };
+})(Wyliodrin);
+
 (function ($) {
   'use strict';
 
@@ -295,7 +307,7 @@
 
   $.ajax({
     success: function (data) {
-      editor.parts = data;
+      Wyliodrin.breadboard.parts = data;
     },
     url: 'assets/app/parts/parts.json',
     xhr: function () {
