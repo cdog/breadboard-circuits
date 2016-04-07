@@ -93,7 +93,7 @@ module.exports = function (grunt) {
     concat: {
       core: {
         src: [
-          'js/editor.js',
+          'js/wyliodrin.js',
           'js/main.js'
         ],
         dest: 'html/assets/app/js/application.js'

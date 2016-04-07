@@ -295,7 +295,7 @@
 
   $.ajax({
     success: function (data) {
-      editor.parts = data;
+      Wyliodrin.breadboard.parts = data;
     },
     url: 'assets/app/parts/parts.json',
     xhr: function () {
