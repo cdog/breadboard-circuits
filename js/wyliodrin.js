@@ -6,6 +6,7 @@ if (typeof window.Wyliodrin === 'undefined') {
   'use strict';
 
   Wyliodrin.breadboard = {
-    parts: []
+    parts: [],
+    partsPath: 'assets/app/parts/parts.json'
   };
 })(Wyliodrin);
