@@ -178,39 +178,42 @@ module.exports = function migrate(grunt) {
   }
 
   function copyPartFiles(path, part, data) {
+    /* icons */
     var svgBasename = Path.basename(data.module.views[0].iconView[0].layers[0].$.image);
 
-    var x = readdir(options.src + '/svg/core/icon');
-    var y = readdir(options.src + '/svg/contrib/icon');
-    var z = x.concat(y).filter(function (path) {
+    var paths = readdir(options.src + '/svg/core/icon')
+      .concat(readdir(options.src + '/svg/contrib/icon'));
+
+    paths = paths.filter(function (path) {
       return Path.basename(path) === svgBasename;
     });
 
-    if (z.length !== 0) {
+    if (paths.length !== 0) {
       var dest = options.dest + '/svg/icons';
 
       fs.mkdirpSync(dest);
-      fs.copySync(z[0], dest + '/' + part.views.icon);
+      fs.copySync(paths[0], dest + '/' + part.views.icon);
     } else {
-      console.log(path + ': File not found: ' + svgBasename);
+      error(path + ': File not found: ' + svgBasename);
     }
 
     /* breadboard */
     svgBasename = Path.basename(data.module.views[0].breadboardView[0].layers[0].$.image);
 
-    x = readdir(options.src + '/svg/core/breadboard');
-    y = readdir(options.src + '/svg/contrib/breadboard');
-    z = x.concat(y).filter(function (path) {
+    paths = readdir(options.src + '/svg/core/breadboard')
+      .concat(readdir(options.src + '/svg/contrib/breadboard'));
+
+    paths = paths.filter(function (path) {
       return Path.basename(path) === svgBasename;
     });
 
-    if (z.length !== 0) {
+    if (paths.length !== 0) {
       var dest = options.dest + '/svg/breadboard';
 
       fs.mkdirpSync(dest);
-      fs.copySync(z[0], dest + '/' + part.views.breadboard);
+      fs.copySync(paths[0], dest + '/' + part.views.breadboard);
     } else {
-      console.log(path + ': File not found: ' + svgBasename);
+      error(path + ': File not found: ' + svgBasename);
     }
   }
 
