@@ -289,141 +289,27 @@
     }
   });
 
-  $.whenAllDone = function () {
-    var dfds = [];
-    var result = $.Deferred();
-
-    $.each(arguments, function (i, dfd) {
-      var cdfd = $.Deferred();
-
-      dfd.always(function () {
-        cdfd.resolve();
-      });
-
-      dfds.push(cdfd.promise());
-    });
-
-    $.when.apply(null, dfds).always(function () {
-      return result.resolve();
-    });
-
-    return result.promise();
-  };
-
-  var library = {
-    categories: []
-  };
-
-  $.get('assets/vendor/fritzing-parts/bins/core.fzb', function (data) {
-    var xml = $.parseXML(data);
-    var $xml = $(xml);
-
-    $xml.find('instance').each(function () {
-      var $this = $(this);
-      var category;
-      var n = library.categories.length;
-      var id = $this.attr('moduleIdRef');
-
-      if (n) {
-        category = library.categories[n - 1];
-      }
-
-      if (id == '__spacer__') {
-        category = {
-          components: []
-        };
-
-        category.name = $this.attr('path');
-
-        library.categories.push(category);
-      } else {
-        var path = $this.attr('path');
-
-        if (path) {
-          category.components.push(path.split('/').pop());
-        } else {
-          category.components.push(id + '.fzp');
-        }
-      }
-    });
-
-    var deferreds = [];
-
-    for (var i = 0; i < library.categories.length; i++) {
-      for (var j = 0; j < library.categories[i].components.length; j++) {
-        deferreds.push((function (i, j) {
-          return $.get('assets/vendor/fritzing-parts/core/' + library.categories[i].components[j], function (data) {
-            var component = {};
-
-            try {
-              var xml = $.parseXML(data);
-              var $xml = $(xml);
-
-              component.title = $xml.find('module > title').text();
-              component.icon = 'assets/vendor/fritzing-parts/svg/core/' + $xml.find('module > views > iconView > layers').attr('image');
-              component.description = $xml.find('module > description').text();
-              component.properties = {};
-
-              $xml.find('module > properties > property').each(function () {
-                var $this = $(this);
-                var key = $this.attr('name').toLowerCase();
-
-                component.properties[key] = $this.text().toLowerCase();
-              });
-
-              component.tags = [];
-
-              $xml.find('module > tags > tag').each(function () {
-                component.tags.push($(this).text().toLowerCase());
-              });
-            } catch (e) {
-              component.title = library.categories[i].components[j];
-              component.error = 'parse error';
-            }
-
-            library.categories[i].components[j] = component;
-          }).fail(function () {
-            library.categories[i].components[j] = {
-              title: library.categories[i].components[j],
-              error: 'not found'
-            };
-          });
-        })(i, j));
-      }
-    }
-
-    $.whenAllDone.apply(null, deferreds).always(function () {
-      var source = $('#categories-template').html();
-      var template = Handlebars.compile(source);
-      var context = library;
-      var html = template(context);
-
-      $('#categories-template').after(html);
-
-      source = $('#components-template').html();
-      template = Handlebars.compile(source);
-      html = template(context);
-
-      $('#components-template').after(html);
-    });
+  NProgress.configure({
+    showSpinner: false
   });
 
-  $('.component-library').on({
-    mouseenter: function () {
-      var $this = $(this);
-      var i = $this.data('category');
-      var j = $this.data('id');
-      var source = $('#component-overview-template').html();
-      var template = Handlebars.compile(source);
-      var context = library.categories[i].components[j];
-      var html = template(context);
-
-      $('#component-overview-template').after(html);
-      $('#component-inspector').addClass('active');
+  $.ajax({
+    success: function (data) {
+      editor.parts = data;
     },
-    mouseleave: function () {
-      $('#component-overview').remove();
-      $('#component-inspector').removeClass('active');
+    url: 'assets/app/parts/parts.json',
+    xhr: function () {
+      var xhr = new window.XMLHttpRequest();
+
+      xhr.addEventListener('progress', function (event) {
+        if (event.lengthComputable) {
+          var percentComplete = event.loaded / event.total;
+
+          NProgress.set(percentComplete);
+        }
+      }, false);
+
+      return xhr;
     }
-  }, '.thumbnail');
+  });
 })(jQuery);
