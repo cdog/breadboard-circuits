@@ -289,27 +289,39 @@
     }
   });
 
-  NProgress.configure({
-    showSpinner: false
-  });
+  function getParts() {
+    var parts = localStorage.getItem('parts');
 
-  $.ajax({
-    success: function (data) {
-      Wyliodrin.breadboard.parts = data;
-    },
-    url: 'assets/app/parts/parts.json',
-    xhr: function () {
-      var xhr = new window.XMLHttpRequest();
-
-      xhr.addEventListener('progress', function (event) {
-        if (event.lengthComputable) {
-          var percentComplete = event.loaded / event.total;
-
-          NProgress.set(percentComplete);
-        }
-      }, false);
-
-      return xhr;
+    if (parts !== null) {
+      return JSON.parse(parts);
     }
-  });
+
+    NProgress.configure({
+      showSpinner: false
+    });
+
+    $.ajax({
+      success: function (data) {
+        localStorage.setItem('parts', data);
+
+        Wyliodrin.breadboard.parts = data;
+      },
+      url: 'assets/app/parts/parts.json',
+      xhr: function () {
+        var xhr = new window.XMLHttpRequest();
+
+        xhr.addEventListener('progress', function (event) {
+          if (event.lengthComputable) {
+            var percentComplete = event.loaded / event.total;
+
+            NProgress.set(percentComplete);
+          }
+        }, false);
+
+        return xhr;
+      }
+    });
+  }
+
+  Wyliodrin.breadboard.parts = getParts();
 })(jQuery);
