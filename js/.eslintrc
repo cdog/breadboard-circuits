@@ -7,7 +7,9 @@
   "globals": {
     "ace": false,
     "d3": false,
-    "Handlebars": false
+    "editor": true,
+    "Handlebars": false,
+    "NProgress": false
   },
   "parser": "babel-eslint",
   "root": true
