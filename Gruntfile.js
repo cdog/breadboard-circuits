@@ -147,6 +147,12 @@ module.exports = function (grunt) {
             cwd: 'node_modules/jquery/dist',
             src: '*',
             dest: 'html/assets/vendor/jquery'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/nprogress',
+            src: ['nprogress.css', 'nprogress.js'],
+            dest: 'html/assets/vendor/nprogress'
           }
         ]
       }
