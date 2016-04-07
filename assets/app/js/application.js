@@ -20,6 +20,8 @@ if (typeof window.Wyliodrin === 'undefined') {
     if (parts !== null) {
       Wyliodrin.breadboard.parts = JSON.parse(parts);
 
+      $(window).trigger('loaded.wyliodrin.parts');
+
       return;
     }
 
@@ -29,9 +31,15 @@ if (typeof window.Wyliodrin === 'undefined') {
 
     $.ajax({
       success: function (data) {
-        localStorage.setItem('parts', JSON.stringify(data));
+        try {
+          localStorage.setItem('parts', JSON.stringify(data));
+        } catch (exception) {
+          // Nothing to do.
+        }
 
         Wyliodrin.breadboard.parts = data;
+
+        $(window).trigger('loaded.wyliodrin.parts');
       },
       url: Wyliodrin.breadboard.partsPath,
       xhr: function () {
@@ -342,5 +350,15 @@ if (typeof window.Wyliodrin === 'undefined') {
           lightBulb.classed('off', true);
         });
     }
+  });
+
+  $('.navbar .navbar-nav > li').click(function (event) {
+    if ($(this).hasClass('disabled')) {
+      event.stopPropagation();
+    }
+  });
+
+  $(window).on('loaded.wyliodrin.parts', function () {
+    $('[data-target="#modal-components"]').parent().removeClass('disabled');
   });
 })(jQuery);
