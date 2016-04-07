@@ -187,7 +187,7 @@ module.exports = function migrate(grunt) {
           return deferred.promise;
         }
 
-        part.source = path;
+        part._source = path;
 
         updatePart(part, result);
 
@@ -219,11 +219,13 @@ module.exports = function migrate(grunt) {
       bin.parts = bin.parts.filter(function (part) {
         if (part.type === 'group') {
           part.parts = part.parts.filter(function (p) {
-            if (p.source === undefined) {
+            if (p._source === undefined) {
               error(part.title + ': No source found: ' + p.id);
 
               return false;
             }
+
+            delete part._source;
 
             return true;
           });
@@ -231,11 +233,13 @@ module.exports = function migrate(grunt) {
           return true;
         }
 
-        if (part.source === undefined) {
+        if (part._source === undefined) {
           error(bin.title + ': No source found: ' + part.id);
 
           return false;
         }
+
+        delete part._source;
 
         return true;
       });
