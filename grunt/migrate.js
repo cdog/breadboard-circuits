@@ -146,8 +146,8 @@ module.exports = function migrate(grunt) {
     part.tags = data.module.tags[0].tag;
     part.title = data.module.title[0];
     part.views = {
-      breadboard: Path.basename(data.module.views[0].breadboardView[0].layers[0].$.image),
-      icon: Path.basename(data.module.views[0].iconView[0].layers[0].$.image)
+      breadboard: Path.basename(data.module.views[0].breadboardView[0].layers[0].$.image).toLowerCase(),
+      icon: Path.basename(data.module.views[0].iconView[0].layers[0].$.image).toLowerCase()
     };
 
     if (data.module.description !== undefined) {
@@ -174,6 +174,43 @@ module.exports = function migrate(grunt) {
       }
 
       part.properties.push(property);
+    }
+  }
+
+  function copyPartFiles(path, part, data) {
+    var svgBasename = Path.basename(data.module.views[0].iconView[0].layers[0].$.image);
+
+    var x = readdir(options.src + '/svg/core/icon');
+    var y = readdir(options.src + '/svg/contrib/icon');
+    var z = x.concat(y).filter(function (path) {
+      return Path.basename(path) === svgBasename;
+    });
+
+    if (z.length !== 0) {
+      var dest = options.dest + '/svg/icons';
+
+      fs.mkdirpSync(dest);
+      fs.copySync(z[0], dest + '/' + part.views.icon);
+    } else {
+      console.log(path + ': File not found: ' + svgBasename);
+    }
+
+    /* breadboard */
+    svgBasename = Path.basename(data.module.views[0].breadboardView[0].layers[0].$.image);
+
+    x = readdir(options.src + '/svg/core/breadboard');
+    y = readdir(options.src + '/svg/contrib/breadboard');
+    z = x.concat(y).filter(function (path) {
+      return Path.basename(path) === svgBasename;
+    });
+
+    if (z.length !== 0) {
+      var dest = options.dest + '/svg/breadboard';
+
+      fs.mkdirpSync(dest);
+      fs.copySync(z[0], dest + '/' + part.views.breadboard);
+    } else {
+      console.log(path + ': File not found: ' + svgBasename);
     }
   }
 
@@ -206,6 +243,7 @@ module.exports = function migrate(grunt) {
         part._source = path;
 
         updatePart(part, result);
+        copyPartFiles(path, part, result);
 
         deferred.resolve();
       });
