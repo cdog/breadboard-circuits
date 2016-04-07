@@ -288,4 +288,14 @@
         });
     }
   });
+
+  $('.navbar .navbar-nav > li').click(function (event) {
+    if ($(this).hasClass('disabled')) {
+      event.stopPropagation();
+    }
+  });
+
+  $(window).on('loaded.wyliodrin.parts', function () {
+    $('[data-target="#modal-components"]').parent().removeClass('disabled');
+  });
 })(jQuery);
