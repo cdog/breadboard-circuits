@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs-extra');
+var Path = require('path');
 var xml2js = require('xml2js');
 var util = require('util');
 var Q = require('q');
@@ -13,7 +14,7 @@ module.exports = function migrate(grunt) {
   var options = {};
   var bins = [];
 
-  function readdir(path, recursive, ext) {
+  function readdir(path, recursive, extname) {
     var results = [];
     var files = fs.readdirSync(path);
 
@@ -24,10 +25,10 @@ module.exports = function migrate(grunt) {
 
       if (stat && stat.isDirectory()) {
         if (recursive) {
-          results = results.concat(readdir(file, recursive, ext));
+          results = results.concat(readdir(file, recursive, extname));
         }
-      } else if (ext) {
-        if (file.split('.').pop() === ext) {
+      } else if (extname) {
+        if (Path.extname(file) === extname) {
           results.push(file);
         }
       } else {
@@ -45,10 +46,27 @@ module.exports = function migrate(grunt) {
     fs.readFile(path, function (err, data) {
       parser.parseString(data, function (err, result) {
         var bin = {
+          icon: result.module.$.icon,
           parts: [],
           title: result.module.title,
           type: 'group'
         };
+
+        var dirname = Path.dirname(path);
+        var icon = dirname + '/' + bin.icon;
+
+        if (fs.existsSync(icon) === true) {
+          var dest = options.dest + '/icons';
+
+          bin.icon = bin.icon.toLowerCase();
+
+          fs.mkdirpSync(dest);
+          fs.copySync(icon, dest + '/' + bin.icon);
+        } else {
+          error(path + ': File not found: ' + icon)
+
+          delete bin.icon;
+        }
 
         var instances = result.module.instances[0].instance;
         var group;
@@ -91,7 +109,7 @@ module.exports = function migrate(grunt) {
     var deferred = Q.defer();
     var promises = [];
 
-    readdir(path, true, 'fzb').forEach(function (file) {
+    readdir(path, true, '.fzb').forEach(function (file) {
       promises.push(loadBin(file));
     });
 
@@ -130,8 +148,8 @@ module.exports = function migrate(grunt) {
     part.tags = data.module.tags[0].tag;
     part.title = data.module.title[0];
     part.views = {
-      breadboard: data.module.views[0].breadboardView[0].layers[0].$.image.split('/').pop(),
-      icon: data.module.views[0].iconView[0].layers[0].$.image.split('/').pop()
+      breadboard: Path.basename(data.module.views[0].breadboardView[0].layers[0].$.image),
+      icon: Path.basename(data.module.views[0].iconView[0].layers[0].$.image)
     };
 
     if (data.module.description !== undefined) {
@@ -202,7 +220,7 @@ module.exports = function migrate(grunt) {
     var deferred = Q.defer();
     var promises = [];
 
-    readdir(path, false, 'fzp').forEach(function (file) {
+    readdir(path, false, '.fzp').forEach(function (file) {
       promises.push(loadPart(file));
     });
 
@@ -290,6 +308,7 @@ module.exports = function migrate(grunt) {
 
       inspect(util.inspect(bins, { depth: null }));
 
+      // Write parts library to disk
       fs.mkdirpSync(options.dest);
       fs.writeFileSync(options.dest + '/parts.json', JSON.stringify(bins));
     }).then(function () {
