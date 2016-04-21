@@ -122,12 +122,6 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
-            cwd: 'node_modules/ace-builds',
-            src: ['src/*', 'src-min/*', 'src-min-noconflict/*', 'src-noconflict/*'],
-            dest: 'html/assets/vendor/ace'
-          },
-          {
-            expand: true,
             cwd: 'node_modules/bootstrap/dist',
             src: '**',
             dest: 'html/assets/vendor/bootstrap'
