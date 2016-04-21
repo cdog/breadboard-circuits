@@ -5,7 +5,7 @@
   },
   "extends": "eslint:recommended",
   "globals": {
-    "ace": false,
+    "angular": false,
     "d3": false,
     "Handlebars": false,
     "NProgress": false,

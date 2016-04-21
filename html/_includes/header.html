@@ -1,43 +1,31 @@
-<nav class="navbar navbar-default navbar-static-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button><!-- .navbar-toggle .collapsed -->
-      <a class="navbar-brand" href="#">{{ site.title }}</a>
-    </div><!-- .navbar-header -->
-    <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="disabled">
-          <a href="#" data-toggle="modal" data-target="#modal-components">
-            <span class="glyphicon glyphicon-plus"></span>
-            Add Component
-          </a>
-        </li>
-      </ul><!-- .nav .navbar-nav -->
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#" id="reset-view">
-            <span class="glyphicon glyphicon-eye-open"></span>
-            Reset View
-          </a><!-- #reset-view -->
-        </li>
-        <li>
-          <a href="#" id="toggle-grid">
-            <span class="glyphicon glyphicon-th"></span>
-            Toggle Grid
-          </a><!-- #toggle-grid -->
-        </li>
-        <li>
-          <a href="#" id="toggle-simulation">
-            <span class="glyphicon glyphicon-play"></span>
-            Toggle Simulation
-          </a><!-- #toggle-simulation -->
-        </li>
-      </ul><!-- .nav .navbar-nav .navbar-right -->
-    </div><!-- #navbar .collapse .navbar-collapse -->
-  </div><!-- .container-fluid -->
-</nav><!-- .navbar .navbar-default .navbar-static-top -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <h2>
+      <span>{{ site.title }}</span>
+    </h2>
+    <md-menu-bar>
+      <md-menu>
+        <button ng-click="$mdOpenMenu()">
+          File
+        </button>
+        <md-menu-content>
+          <md-menu-item>
+            <md-button disabled="disabled">
+              Open&hellip;
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-menu-bar>
+    <span flex></span>
+    <md-button aria-label="Reset View">
+      Reset View
+    </md-button>
+    <md-button aria-label="Toggle Grid">
+      Toggle Grid
+    </md-button>
+    <md-button aria-label="Toggle Simulation">
+      Toggle Simulation
+    </md-button>
+  </div>
+</md-toolbar>

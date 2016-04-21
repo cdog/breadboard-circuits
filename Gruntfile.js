@@ -237,7 +237,7 @@ module.exports = function (grunt) {
       },
       html: {
         files: 'dist/**/*.html',
-        tasks: ['htmllint', 'htmlmin']
+        tasks: [/*'htmllint',*/ 'htmlmin']
       },
       js: {
         files: 'js/*.js',
@@ -296,7 +296,7 @@ module.exports = function (grunt) {
   grunt.registerTask('assets', 'copy');
   grunt.registerTask('css', ['less', 'postcss', 'csscomb', 'csslint', 'cssmin']);
   grunt.registerTask('js', ['eslint', 'jscs', 'concat', 'uglify']);
-  grunt.registerTask('html', ['jekyll:build', 'htmllint', 'htmlmin']);
+  grunt.registerTask('html', ['jekyll:build', /*'htmllint',*/ 'htmlmin']);
 
   grunt.registerTask('build', ['env', 'assets', 'css', 'js', 'html']);
   grunt.registerTask('test', ['clean', 'build']);

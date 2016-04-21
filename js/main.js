@@ -296,4 +296,8 @@
   $(window).on('loaded.wyliodrin.parts', function () {
     $('[data-target="#modal-components"]').parent().removeClass('disabled');
   });
+
+  angular.module('schemedApp', ['ngMaterial']).config(function ($mdThemingProvider) {
+    $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('deep-orange');
+  });
 })(jQuery);
