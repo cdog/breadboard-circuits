@@ -4,7 +4,17 @@ slug: front
 ---
 
 <div flex layout="row">
+  <md-sidenav md-component-id="left" md-is-locked-open="true" md-whiteframe="2">
+    <md-toolbar>
+      <h1 class="md-toolbar-tools">Library</h1>
+    </md-toolbar>
+  </md-sidenav>
   <md-content flex>
     <div id="viewport"></div>
   </md-content>
+  <md-sidenav md-component-id="right" md-is-locked-open="true" md-whiteframe="2">
+    <md-toolbar>
+      <h1 class="md-toolbar-tools">Inspector</h1>
+    </md-toolbar>
+  </md-sidenav>
 </div>
