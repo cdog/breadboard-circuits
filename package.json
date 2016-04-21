@@ -1,5 +1,5 @@
 {
-  "name": "breadboard-circuits",
+  "name": "schemed",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cdog/breadboard-circuits.git"
+    "url": "git+https://github.com/cdog/schemed.git"
   },
   "keywords": [
     "breadboard",
@@ -22,9 +22,9 @@
   "author": "Cătălin Dogaru",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cdog/breadboard-circuits/issues"
+    "url": "https://github.com/cdog/schemed/issues"
   },
-  "homepage": "https://github.com/cdog/breadboard-circuits#readme",
+  "homepage": "https://github.com/cdog/schemed#readme",
   "dependencies": {
     "ace-builds": "^1.2.2",
     "angular": "^1.5.5",
