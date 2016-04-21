@@ -236,8 +236,6 @@
     }).hide();
   });
 
-  ace.edit('code-editor');
-
   $('#reset-view').click(function (event) {
     event.preventDefault();
 
