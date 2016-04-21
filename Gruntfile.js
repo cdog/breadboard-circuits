@@ -122,6 +122,36 @@ module.exports = function (grunt) {
         files: [
           {
             expand: true,
+            cwd: 'node_modules/angular',
+            src: '*',
+            dest: 'html/assets/vendor/angular'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/angular-animate',
+            src: '*',
+            dest: 'html/assets/vendor/angular-animate'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/angular-aria',
+            src: '*',
+            dest: 'html/assets/vendor/angular-aria'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/angular-material',
+            src: '*',
+            dest: 'html/assets/vendor/angular-material'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/angular-messages',
+            src: '*',
+            dest: 'html/assets/vendor/angular-messages'
+          },
+          {
+            expand: true,
             cwd: 'node_modules/bootstrap/dist',
             src: '**',
             dest: 'html/assets/vendor/bootstrap'
