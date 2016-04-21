@@ -15,7 +15,7 @@ url:      ""
 permalink:  pretty
 
 # Site settings
-title: Breadboard Circuits
-tagline:
-description:
+title: schemEd
+tagline: An HTML5 schematic editor for the web.
+description: schemEd is a HTML5 schematic editor for the web.
 author: Cătălin Dogaru
