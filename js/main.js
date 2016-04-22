@@ -236,21 +236,6 @@
     }).hide();
   });
 
-  $('#reset-view').click(function (event) {
-    event.preventDefault();
-
-    zoom.scale(1);
-    zoom.translate([0, 0]);
-    pattern.attr('patternTransform', null);
-    group.attr('transform', null);
-  });
-
-  $('#toggle-grid').click(function (event) {
-    event.preventDefault();
-
-    $(grid[0]).toggle();
-  });
-
   $('#toggle-simulation').click(function (event) {
     event.preventDefault();
 
@@ -326,6 +311,13 @@
     $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('red');
   }).controller('AppCtrl', function ($http, $rootScope) {
     loadParts($http, $rootScope);
+
+    this.resetView = function () {
+      zoom.scale(1);
+      zoom.translate([0, 0]);
+      pattern.attr('patternTransform', null);
+      group.attr('transform', null);
+    };
 
     this.toggleGrid = function () {
       $(grid[0]).toggle();
