@@ -181,8 +181,10 @@ module.exports = function migrate(grunt) {
     /* icons */
     var svgBasename = Path.basename(data.module.views[0].iconView[0].layers[0].$.image);
 
-    var paths = readdir(options.src + '/svg/core/icon')
-      .concat(readdir(options.src + '/svg/contrib/icon'));
+    var paths = readdir(options.src + '/svg/core/breadboard')
+      .concat(readdir(options.src + '/svg/contrib/icon'))
+      .concat(readdir(options.src + '/svg/contrib/breadboard'))
+      .concat(readdir(options.src + '/svg/core/icon'));
 
     paths = paths.filter(function (path) {
       return Path.basename(path) === svgBasename;
