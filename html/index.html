@@ -11,10 +11,10 @@
     <link href="assets/vendor/angular-material/angular-material.css" rel="stylesheet">
     <link href="assets/app/css/style.css" rel="stylesheet">
   </head>
-  <body ng-app="schemedApp" ng-controller="AppCtrl as ac" layout="column" ng-cloak>
+  <body ng-app="MyApp" ng-controller="AppCtrl as ctrl" layout="column" ng-cloak>
     <md-toolbar layout="row">
       <div class="md-toolbar-tools">
-        <h2>{{ site.title }}</h2>
+        <h2>Breadboard Circuits</h2>
         <md-menu-bar>
           <md-menu>
             <button ng-click="$mdOpenMenu()">
@@ -33,7 +33,7 @@
         <md-button aria-label="Reset View">
           Reset View
         </md-button>
-        <md-button aria-label="Toggle Grid" ng-click="ac.toggleGrid()">
+        <md-button aria-label="Toggle Grid" ng-click="ctrl.toggleGrid()">
           Toggle Grid
         </md-button>
         <md-button aria-label="Toggle Simulation">
@@ -46,11 +46,14 @@
         <md-toolbar>
           <h1 class="md-toolbar-tools">Library</h1>
         </md-toolbar>
-        <md-select ng-model="ac.userState">
-          <md-option ng-repeat="state in ac.states" value="{{ state.abbrev }}">
-            {{ state.abbrev }}
-          </md-option>
-        </md-select>
+        <md-input-container>
+          <label>Category</label>
+          <md-select ng-model="ctrl.userCategory">
+            <md-option ng-repeat="category in ctrl.categories" value="{{ category.name }}">
+              {{ category.name }}
+            </md-option>
+          </md-select>
+        </md-input-container>
       </md-sidenav>
       <md-content flex>
         <div id="viewport"></div>
@@ -61,15 +64,14 @@
         </md-toolbar>
       </md-sidenav>
     </div>
-    <script src="assets/vendor/angular/angular.js"></script>
-    <script src="assets/vendor/angular-animate/angular-animate.js"></script>
-    <script src="assets/vendor/angular-aria/angular-aria.js"></script>
-    <script src="assets/vendor/angular-material/angular-material.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="assets/vendor/jquery/jquery.min.js"><\/script>')</script>
     <script src="assets/vendor/d3/d3.min.js"></script>
-    <script src="assets/vendor/handlebars/handlebars.min.js"></script>
-    <script src="assets/vendor/nprogress/nprogress.js"></script>
-    <script src="assets/app/js/application.js"></script>
+    <script src="assets/vendor/angular/angular.min.js"></script>
+    <script src="assets/vendor/angular-animate/angular-animate.min.js"></script>
+    <script src="assets/vendor/angular-aria/angular-aria.min.js"></script>
+    <script src="assets/vendor/angular-messages/angular-messages.min.js"></script>
+    <script src="assets/vendor/angular-material/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="assets/app/js/application.min.js"></script>
   </body>
 </html>
