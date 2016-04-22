@@ -210,7 +210,7 @@
           categories.push(category);
         });
 
-        $scope.category = categories[0].key;
+        $scope.category = categories[2].key;
         $scope.categories = categories;
 
         resolve();
