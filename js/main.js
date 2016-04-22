@@ -297,17 +297,18 @@
     $('[data-target="#modal-components"]').parent().removeClass('disabled');
   });
 
-  angular.module('schemedApp', ['ngMaterial']).config(function ($mdThemingProvider) {
+  angular.module('MyApp', ['ngMaterial']).config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('red');
   }).controller('AppCtrl', function () {
     this.toggleGrid = function () {
       $(grid[0]).toggle();
     };
 
-    this.userState = '';
-    this.states = ('ana are mere').split(' ').map(function (state) {
+    this.userCategory = '';
+
+    this.categories = ('Core Contrib').split(' ').map(function (category) {
       return {
-        abbrev: state
+        name: category
       };
     });
   });
