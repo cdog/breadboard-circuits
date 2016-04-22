@@ -1,4 +1,4 @@
-(function ($) {
+(function () {
   'use strict';
 
   var canvasId = 'canvas';
@@ -10,12 +10,6 @@
   var gridFill = 'none';
   var gridStroke = '#ddd';
   var gridStrokeWidth = 1;
-
-  var editing = true;
-
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
 
   function zoomed() {
     pattern.attr('patternTransform', 'translate(' + d3.event.translate + ') scale(' + d3.event.scale + ')');
@@ -37,54 +31,13 @@
     d3.select(this)
       .attr('x', d3.event.x)
       .attr('y', d3.event.y);
-
-    line1
-      .attr('x1', Number(pushbutton.attr('x')) + 23.5)
-      .attr('y1', Number(pushbutton.attr('y')) + .5)
-      .attr('x2', Number(lightBulb.attr('x')) + 45)
-      .attr('y2', Number(lightBulb.attr('y')) + 163);
-
-    line2
-      .attr('x1', Number(aaBattery.attr('x')) + .5)
-      .attr('y1', Number(aaBattery.attr('y')) + 25)
-      .attr('x2', Number(pushbutton.attr('x')) + 4.5)
-      .attr('y2', Number(pushbutton.attr('y')) + 29.5);
-
-    line3
-      .attr('x1', Number(aaBattery.attr('x')) + 163.5)
-      .attr('y1', Number(aaBattery.attr('y')) + 25)
-      .attr('x2', Number(lightBulb.attr('x')) + 55)
-      .attr('y2', Number(lightBulb.attr('y')) + 163);
   }
 
   function dragended() {
     d3.select(this).classed('dragging', false);
   }
 
-  function loadComponent(url, component) {
-    var dfd = new jQuery.Deferred();
-
-    d3.xml(url, 'image/svg+xml', function (xml) {
-      components[component] = xml.documentElement;
-
-      dfd.resolve();
-    });
-
-    return dfd.promise();
-  }
-
-  function loadComponents() {
-    var dfd = [];
-
-    dfd.push(loadComponent('assets/app/img/components/aa-battery.svg', 'aaBattery'));
-    dfd.push(loadComponent('assets/app/img/components/breadboard.svg', 'breadboard'));
-    dfd.push(loadComponent('assets/app/img/components/light-bulb.svg', 'lightBulb'));
-    dfd.push(loadComponent('assets/app/img/components/pushbutton.svg', 'pushbutton'));
-
-    return dfd;
-  }
-
-  var drag = d3.behavior.drag()
+  /*var drag = */d3.behavior.drag()
     .origin(function () {
       return {
         x: d3.select(this).attr('x'),
@@ -147,89 +100,7 @@
 
   grid.visible = true;
 
-  var group = canvas.append('g').
-    classed('editing', editing);
-
-  var components = {};
-  var aaBattery;
-  var breadboard;
-  var lightBulb;
-  var pushbutton;
-  var line1;
-  var line2;
-  var line3;
-
-  $.when.apply($, loadComponents()).then(function () {
-    var rect = canvas.node().getBoundingClientRect();
-    var node;
-
-    node = group.node().appendChild(components.breadboard);
-
-    breadboard = d3.select(node)
-      .attr('class', 'component')
-      .attr('width', 660)
-      .attr('height', 220)
-      .attr('x', getRandomInt(0, rect.width - 660))
-      .attr('y', getRandomInt(0, rect.height - 220))
-      .call(drag);
-
-    node = group.node().appendChild(components.aaBattery);
-
-    aaBattery = d3.select(node)
-      .attr('class', 'component')
-      .attr('width', 164)
-      .attr('height', 50)
-      .attr('x', getRandomInt(0, rect.width - 164))
-      .attr('y', getRandomInt(0, rect.height - 50))
-      .call(drag);
-
-    node = group.node().appendChild(components.lightBulb);
-
-    lightBulb = d3.select(node)
-      .attr('class', 'component off')
-      .attr('width', 100)
-      .attr('height', 164)
-      .attr('x', getRandomInt(0, rect.width - 100))
-      .attr('y', getRandomInt(0, rect.height - 164))
-      .call(drag);
-
-    node = group.node().appendChild(components.pushbutton);
-
-    pushbutton = d3.select(node)
-      .attr('class', 'component')
-      .attr('width', 28)
-      .attr('height', 30)
-      .attr('x', getRandomInt(0, rect.width - 28))
-      .attr('y', getRandomInt(0, rect.height - 30))
-      .call(drag);
-
-    line1 = group.append('line')
-      .attr('stroke', '#f00')
-      .attr('stroke-width', 3)
-      .attr('stroke-linecap', 'round')
-      .attr('x1', Number(pushbutton.attr('x')) + 23.5)
-      .attr('y1', Number(pushbutton.attr('y')) + .5)
-      .attr('x2', Number(lightBulb.attr('x')) + 45)
-      .attr('y2', Number(lightBulb.attr('y')) + 163);
-
-    line2 = group.append('line')
-      .attr('stroke', '#f00')
-      .attr('stroke-width', 3)
-      .attr('stroke-linecap', 'round')
-      .attr('x1', Number(aaBattery.attr('x')) + .5)
-      .attr('y1', Number(aaBattery.attr('y')) + 25)
-      .attr('x2', Number(pushbutton.attr('x')) + 4.5)
-      .attr('y2', Number(pushbutton.attr('y')) + 29.5);
-
-    line3 = group.append('line')
-      .attr('stroke', '#f00')
-      .attr('stroke-width', 3)
-      .attr('stroke-linecap', 'round')
-      .attr('x1', Number(aaBattery.attr('x')) + 163.5)
-      .attr('y1', Number(aaBattery.attr('y')) + 25)
-      .attr('x2', Number(lightBulb.attr('x')) + 55)
-      .attr('y2', Number(lightBulb.attr('y')) + 163);
-  });
+  var group = canvas.append('g');
 
   function loadParts($http, $rootScope) {
     var parts = localStorage.getItem('parts');
@@ -286,38 +157,6 @@
       grid.style('visibility', visibility);
     };
 
-    this.toggleSimulation = function () {
-      editing = !editing;
-
-      group.classed('editing', editing);
-
-      if (editing) {
-        pushbutton
-          .on('mousedown', null)
-          .on('mouseup', null);
-
-        breadboard.call(drag);
-        aaBattery.call(drag);
-        lightBulb.call(drag);
-        pushbutton.call(drag);
-      } else {
-        breadboard.on('.drag', null);
-        aaBattery.on('.drag', null);
-        lightBulb.on('.drag', null);
-        pushbutton.on('.drag', null);
-
-        pushbutton
-          .on('mousedown', function () {
-            pushbutton.classed('pressed', true);
-            lightBulb.classed('off', false);
-          })
-          .on('mouseup', function () {
-            pushbutton.classed('pressed', false);
-            lightBulb.classed('off', true);
-          });
-      }
-    };
-
     this.userCategory = '';
 
     this.categories = ('Core Contrib').split(' ').map(function (category) {
@@ -326,4 +165,4 @@
       };
     });
   });
-})(jQuery);
+})();
