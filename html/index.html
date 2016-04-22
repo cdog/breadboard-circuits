@@ -12,6 +12,7 @@
     <link href="assets/app/css/style.css" rel="stylesheet">
   </head>
   <body ng-app="MyApp" ng-controller="AppCtrl as ctrl" layout="column" ng-cloak>
+    <md-progress-linear md-mode="determinate" value="{{ progress }}" ng-show="progress < 100"></md-progress-linear>
     <md-toolbar layout="row" md-whiteframe="2">
       <div class="md-toolbar-tools">
         <h2>Breadboard Circuits</h2>
@@ -47,6 +48,7 @@
           <label>Category</label>
           <md-select ng-model="category" md-on-open="loadCategories()">
             <md-option ng-repeat="category in categories" value="{{ category.title }}">
+              <img src="{{ category.icon }}" alt="{{ category.title }}" ng-show="category.icon">
               {{ category.title }}
             </md-option>
           </md-select>

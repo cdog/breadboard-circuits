@@ -102,7 +102,7 @@
 
   var group = canvas.append('g');
 
-  function loadParts($http, $rootScope) {
+  function loadParts($http, $rootScope, $scope) {
     var parts = localStorage.getItem('parts');
 
     if (parts !== null) {
@@ -119,8 +119,7 @@
           if (event.lengthComputable) {
             var progress = event.loaded / event.total;
 
-            /* eslint no-console: 0 */
-            console.log(progress);
+            $scope.progress = progress * 100;
           }
         }
       }
@@ -149,7 +148,7 @@
   });
 
   schemedApp.controller('AppCtrl', function ($http, $rootScope, $scope, $q) {
-    loadParts($http, $rootScope);
+    loadParts($http, $rootScope, $scope);
 
     $scope.resetView = function () {
       zoom.scale(1);
@@ -174,9 +173,15 @@
         var categories = [];
 
         angular.forEach(Wyliodrin.schemed.parts, function (value) {
-          categories.push({
-            title: value.title[0]
-          });
+          var category = {
+            title: value.title
+          };
+
+          if (value.icon !== undefined) {
+            category.icon = 'assets/app/parts/icons/' + value.icon;
+          }
+
+          categories.push(category);
         });
 
         $scope.category = categories[0].title;
