@@ -152,12 +152,6 @@ module.exports = function (grunt) {
           },
           {
             expand: true,
-            cwd: 'node_modules/bootstrap/dist',
-            src: '**',
-            dest: 'html/assets/vendor/bootstrap'
-          },
-          {
-            expand: true,
             cwd: 'node_modules/d3',
             src: ['d3.js', 'd3.min.js'],
             dest: 'html/assets/vendor/d3'
