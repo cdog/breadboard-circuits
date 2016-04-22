@@ -1,20 +1,75 @@
----
-layout: default
-slug: front
----
-
-<div flex layout="row">
-  <md-sidenav md-component-id="left" md-is-locked-open="true" md-whiteframe="2">
-    <md-toolbar>
-      <h1 class="md-toolbar-tools">Library</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Breadboard Circuits is an HTML5 schematic editor for the web.">
+    <meta name="author" content="Cătălin Dogaru">
+    <link rel="icon" href="favicon.ico">
+    <title>Breadboard Circuits &middot; An HTML5 schematic editor for the web.</title>
+    <link href="assets/vendor/angular-material/angular-material.css" rel="stylesheet">
+    <link href="assets/app/css/style.css" rel="stylesheet">
+  </head>
+  <body ng-app="schemedApp" ng-controller="AppCtrl as ac" layout="column" ng-cloak>
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <h2>{{ site.title }}</h2>
+        <md-menu-bar>
+          <md-menu>
+            <button ng-click="$mdOpenMenu()">
+              File
+            </button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button disabled="disabled">
+                  Open&hellip;
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </md-menu-bar>
+        <span flex></span>
+        <md-button aria-label="Reset View">
+          Reset View
+        </md-button>
+        <md-button aria-label="Toggle Grid" ng-click="ac.toggleGrid()">
+          Toggle Grid
+        </md-button>
+        <md-button aria-label="Toggle Simulation">
+          Toggle Simulation
+        </md-button>
+      </div>
     </md-toolbar>
-  </md-sidenav>
-  <md-content flex>
-    <div id="viewport"></div>
-  </md-content>
-  <md-sidenav md-component-id="right" md-is-locked-open="true" md-whiteframe="2">
-    <md-toolbar>
-      <h1 class="md-toolbar-tools">Inspector</h1>
-    </md-toolbar>
-  </md-sidenav>
-</div>
+    <div flex layout="row">
+      <md-sidenav md-component-id="left" md-is-locked-open="true" md-whiteframe="2">
+        <md-toolbar>
+          <h1 class="md-toolbar-tools">Library</h1>
+        </md-toolbar>
+        <md-select ng-model="ac.userState">
+          <md-option ng-repeat="state in ac.states" value="{{ state.abbrev }}">
+            {{ state.abbrev }}
+          </md-option>
+        </md-select>
+      </md-sidenav>
+      <md-content flex>
+        <div id="viewport"></div>
+      </md-content>
+      <md-sidenav md-component-id="right" md-is-locked-open="true" md-whiteframe="2">
+        <md-toolbar>
+          <h1 class="md-toolbar-tools">Inspector</h1>
+        </md-toolbar>
+      </md-sidenav>
+    </div>
+    <script src="assets/vendor/angular/angular.js"></script>
+    <script src="assets/vendor/angular-animate/angular-animate.js"></script>
+    <script src="assets/vendor/angular-aria/angular-aria.js"></script>
+    <script src="assets/vendor/angular-material/angular-material.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/vendor/jquery/jquery.min.js"><\/script>')</script>
+    <script src="assets/vendor/d3/d3.min.js"></script>
+    <script src="assets/vendor/handlebars/handlebars.min.js"></script>
+    <script src="assets/vendor/nprogress/nprogress.js"></script>
+    <script src="assets/app/js/application.js"></script>
+  </body>
+</html>
