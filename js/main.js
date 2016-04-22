@@ -297,7 +297,7 @@
     $('[data-target="#modal-components"]').parent().removeClass('disabled');
   });
 
-  angular.module('MyApp', ['ngMaterial']).config(function ($mdThemingProvider) {
+  angular.module('MyApp', ['ngMaterial', 'ngMessages']).config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('red');
   }).controller('AppCtrl', function () {
     this.toggleGrid = function () {

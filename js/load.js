@@ -30,10 +30,8 @@
 
         xhr.addEventListener('progress', function (event) {
           if (event.lengthComputable) {
+            /* eslint no-unused-vars: 0 */
             var progress = event.loaded / event.total;
-
-            /* eslint no-console: 0 */
-            console.log(progress);
           }
         }, false);
 
