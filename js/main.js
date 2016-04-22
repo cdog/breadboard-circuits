@@ -287,12 +287,6 @@
     }
   });
 
-  $('.navbar .navbar-nav > li').click(function (event) {
-    if ($(this).hasClass('disabled')) {
-      event.stopPropagation();
-    }
-  });
-
   function loadParts($http, $rootScope) {
     var parts = localStorage.getItem('parts');
 
