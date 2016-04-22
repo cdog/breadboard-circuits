@@ -41,24 +41,40 @@
     </md-toolbar>
     <div flex layout="row">
       <md-sidenav md-component-id="left" md-is-locked-open="true" md-whiteframe="2">
-        <md-toolbar>
+        <md-toolbar class="md-hue-3">
           <h1 class="md-toolbar-tools">Library</h1>
         </md-toolbar>
-        <md-input-container>
-          <label>Category</label>
-          <md-select ng-model="category" md-on-open="loadCategories()">
-            <md-option ng-repeat="category in categories" value="{{ category.title }}">
-              <img ng-src="{{ category.icon }}" alt="{{ category.title }}" ng-show="category.icon">
-              {{ category.title }}
-            </md-option>
-          </md-select>
-        </md-input-container>
+        <div class="md-padding">
+          <md-input-container layout="column">
+            <label>Category</label>
+            <md-select ng-model="category" md-on-open="loadCategories()">
+              <md-option ng-repeat="category in categories" value="{{ category.key }}">
+                <img ng-src="{{ category.icon }}" alt="{{ category.title }}" ng-show="category.icon">
+                {{ category.title }}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+        <md-list>
+          <div ng-repeat="part in parts">
+            <div ng-if="part.type === 'group'">
+              <md-divider></md-divider>
+              <md-subheader class="md-no-sticky">{{ part.title }}</md-subheader>
+            </div>
+            <div ng-if="part.type === 'part'">
+              <md-list-item ng-click="null">
+                <img ng-src="{{ part.icon }}" alt="{{ part.title }}" class="md-avatar">
+                <p>{{ part.title }}</p>
+              </md-list-item>
+            </div>
+          </div>
+        </md-list>
       </md-sidenav>
       <md-content flex>
         <div id="viewport"></div>
       </md-content>
       <md-sidenav md-component-id="right" md-is-locked-open="true" md-whiteframe="2">
-        <md-toolbar>
+        <md-toolbar class="md-hue-3">
           <h1 class="md-toolbar-tools">Inspector</h1>
         </md-toolbar>
       </md-sidenav>

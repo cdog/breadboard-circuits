@@ -136,6 +136,31 @@
     });
   }
 
+  function flattenCategory(elem) {
+    var parts = [];
+
+    angular.forEach(elem, function (value, key) {
+      var part = {
+        key: key,
+        title: value.title,
+        type: value.type
+      };
+
+      if (value.type === 'part') {
+        part.id = value.id;
+        part.icon = 'assets/app/parts/svg/icons/' + value.views.icon;
+      }
+
+      parts.push(part);
+
+      if (value.type === 'group') {
+        parts = parts.concat(flattenCategory(value.parts));
+      }
+    });
+
+    return parts;
+  }
+
   var schemedApp = angular.module('MyApp', [
     'ngMaterial'
   ]);
@@ -172,8 +197,9 @@
       $rootScope.$on('loaded.wyliodrin.parts', function () {
         var categories = [];
 
-        angular.forEach(Wyliodrin.schemed.parts, function (value) {
+        angular.forEach(Wyliodrin.schemed.parts, function (value, key) {
           var category = {
+            key: key,
             title: value.title
           };
 
@@ -184,7 +210,7 @@
           categories.push(category);
         });
 
-        $scope.category = categories[0].title;
+        $scope.category = categories[0].key;
         $scope.categories = categories;
 
         resolve();
@@ -194,5 +220,17 @@
     $scope.loadCategories = function () {
       return $scope.categories || x;
     };
+
+    $scope.parts = null;
+
+    $scope.loadCategory = function () {
+      if ($scope.category === null) {
+        return;
+      }
+
+      $scope.parts = flattenCategory(Wyliodrin.schemed.parts[$scope.category].parts);
+    };
+
+    $scope.$watch('category', $scope.loadCategory);
   });
 })();
