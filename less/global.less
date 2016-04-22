@@ -16,11 +16,20 @@
   display: block;
 }
 
-md-divider {
-  margin-top: 10px;
+md-list {
+  md-divider {
+    margin-top: 10px;
+  }
 }
 
-.md-avatar {
-  border-radius: 0;
-  vertical-align: middle;
+md-list-item {
+  .md-list-item-inner {
+    .md-avatar {
+      border-radius: 0;
+    }
+
+    p {
+      line-height: 1.2;
+    }
+  }
 }
