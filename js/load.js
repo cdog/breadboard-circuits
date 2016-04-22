@@ -12,10 +12,6 @@
       return;
     }
 
-    NProgress.configure({
-      showSpinner: false
-    });
-
     $.ajax({
       success: function (data) {
         try {
@@ -36,7 +32,8 @@
           if (event.lengthComputable) {
             var progress = event.loaded / event.total;
 
-            NProgress.set(progress);
+            /* eslint no-console: 0 */
+            console.log(progress);
           }
         }, false);
 
