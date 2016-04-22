@@ -145,6 +145,8 @@
     .attr('height', canvasHeight)
     .attr('fill', 'url(#' + gridId + ')');
 
+  grid.visible = true;
+
   var group = canvas.append('g').
     classed('editing', editing);
 
@@ -276,7 +278,11 @@
     };
 
     this.toggleGrid = function () {
-      $(grid[0]).toggle();
+      grid.visible = !grid.visible;
+
+      var visibility = grid.visible ? 'visible' : 'hidden';
+
+      grid.style('visibility', visibility);
     };
 
     this.toggleSimulation = function () {
