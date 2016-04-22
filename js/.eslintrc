@@ -7,8 +7,6 @@
   "globals": {
     "angular": false,
     "d3": false,
-    "Handlebars": false,
-    "NProgress": false,
     "Wyliodrin": true
   },
   "parser": "babel-eslint",
