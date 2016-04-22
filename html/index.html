@@ -18,14 +18,30 @@
         <h2>Breadboard Circuits</h2>
         <md-menu-bar>
           <md-menu>
-            <button ng-click="$mdOpenMenu()">
-              File
-            </button>
+            <button ng-click="$mdOpenMenu()">File</button>
             <md-menu-content>
               <md-menu-item>
-                <md-button disabled="disabled">
-                  Open&hellip;
-                </md-button>
+                <md-button>New&hellip;</md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button>Open&hellip;</md-button>
+              </md-menu-item>
+              <md-menu-divider></md-menu-divider>
+              <md-menu-item>
+                <md-button disabled="disabled">Close</md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button disabled="disabled">Save</md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button disabled="disabled">Save As&hellip;</md-button>
+              </md-menu-item>
+              <md-menu-divider></md-menu-divider>
+              <md-menu-item>
+                <md-button>Import</md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button disabled="disabled">Export</md-button>
               </md-menu-item>
             </md-menu-content>
           </md-menu>
