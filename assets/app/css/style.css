@@ -13,12 +13,14 @@
   background-color: #f8f8f8;
   display: block;
 }
-md-divider {
+md-list md-divider {
   margin-top: 10px;
 }
-.md-avatar {
+md-list-item .md-list-item-inner .md-avatar {
   border-radius: 0;
-  vertical-align: middle;
+}
+md-list-item .md-list-item-inner p {
+  line-height: 1.2;
 }
 .editing .component {
   cursor: move !important;
