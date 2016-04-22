@@ -160,6 +160,7 @@
   var line3;
 
   $.when.apply($, loadComponents()).then(function () {
+    var rect = canvas.node().getBoundingClientRect();
     var node;
 
     node = group.node().appendChild(components.breadboard);
@@ -168,8 +169,8 @@
       .attr('class', 'component')
       .attr('width', 660)
       .attr('height', 220)
-      .attr('x', getRandomInt(0, $(canvas[0]).width() - 660))
-      .attr('y', getRandomInt(0, $(canvas[0]).height() - 220))
+      .attr('x', getRandomInt(0, rect.width - 660))
+      .attr('y', getRandomInt(0, rect.height - 220))
       .call(drag);
 
     node = group.node().appendChild(components.aaBattery);
@@ -178,8 +179,8 @@
       .attr('class', 'component')
       .attr('width', 164)
       .attr('height', 50)
-      .attr('x', getRandomInt(0, $(canvas[0]).width() - 164))
-      .attr('y', getRandomInt(0, $(canvas[0]).height() - 50))
+      .attr('x', getRandomInt(0, rect.width - 164))
+      .attr('y', getRandomInt(0, rect.height - 50))
       .call(drag);
 
     node = group.node().appendChild(components.lightBulb);
@@ -188,8 +189,8 @@
       .attr('class', 'component off')
       .attr('width', 100)
       .attr('height', 164)
-      .attr('x', getRandomInt(0, $(canvas[0]).width() - 100))
-      .attr('y', getRandomInt(0, $(canvas[0]).height() - 164))
+      .attr('x', getRandomInt(0, rect.width - 100))
+      .attr('y', getRandomInt(0, rect.height - 164))
       .call(drag);
 
     node = group.node().appendChild(components.pushbutton);
@@ -198,8 +199,8 @@
       .attr('class', 'component')
       .attr('width', 28)
       .attr('height', 30)
-      .attr('x', getRandomInt(0, $(canvas[0]).width() - 28))
-      .attr('y', getRandomInt(0, $(canvas[0]).height() - 30))
+      .attr('x', getRandomInt(0, rect.width - 28))
+      .attr('y', getRandomInt(0, rect.height - 30))
       .call(drag);
 
     line1 = group.append('line')
