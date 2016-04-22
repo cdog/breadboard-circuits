@@ -3,7 +3,6 @@
 
 # Build generated files
 /dist
-/html/assets
 
 # OS generated files
 ._*
@@ -18,9 +17,6 @@ Thumbs.db
 *.log
 *.vi
 *~
-
-# Jekyll metadata
-html/.jekyll-metadata
 
 # Folders to ignore
 bower_components
