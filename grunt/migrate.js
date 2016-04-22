@@ -48,7 +48,7 @@ module.exports = function migrate(grunt) {
         var bin = {
           icon: result.module.$.icon.toLowerCase(),
           parts: [],
-          title: result.module.title,
+          title: result.module.title[0],
           type: 'group'
         };
 
