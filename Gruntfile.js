@@ -93,7 +93,6 @@ module.exports = function (grunt) {
       core: {
         src: [
           'js/wyliodrin.js',
-          'js/load.js',
           'js/main.js'
         ],
         dest: 'dist/assets/app/js/application.js'

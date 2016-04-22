@@ -297,9 +297,46 @@
     $('[data-target="#modal-components"]').parent().removeClass('disabled');
   });
 
-  angular.module('MyApp', ['ngMaterial', 'ngMessages']).config(function ($mdThemingProvider) {
+  function loadParts($http) {
+    var parts = localStorage.getItem('parts');
+
+    if (parts !== null) {
+      Wyliodrin.schemed.parts = JSON.parse(parts);
+
+      $(window).trigger('loaded.wyliodrin.parts');
+
+      return;
+    }
+
+    $http.get(Wyliodrin.schemed.partsPath, {
+      eventHandlers: {
+        progress: function (event) {
+          if (event.lengthComputable) {
+            var progress = event.loaded / event.total;
+
+            /* eslint no-console: 0 */
+            console.log(progress);
+          }
+        }
+      }
+    }).then(function (response) {
+      try {
+        localStorage.setItem('parts', JSON.stringify(response.data));
+      } catch (exception) {
+        // Nothing to do.
+      }
+
+      Wyliodrin.schemed.parts = response.data;
+
+      $(window).trigger('loaded.wyliodrin.parts');
+    });
+  }
+
+  angular.module('MyApp', ['ngMaterial']).config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('red');
-  }).controller('AppCtrl', function () {
+  }).controller('AppCtrl', function ($http) {
+    loadParts($http);
+
     this.toggleGrid = function () {
       $(grid[0]).toggle();
     };
