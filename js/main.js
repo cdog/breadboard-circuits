@@ -293,17 +293,13 @@
     }
   });
 
-  $(window).on('loaded.wyliodrin.parts', function () {
-    $('[data-target="#modal-components"]').parent().removeClass('disabled');
-  });
-
-  function loadParts($http) {
+  function loadParts($http, $rootScope) {
     var parts = localStorage.getItem('parts');
 
     if (parts !== null) {
       Wyliodrin.schemed.parts = JSON.parse(parts);
 
-      $(window).trigger('loaded.wyliodrin.parts');
+      $rootScope.$emit('loaded.wyliodrin.parts');
 
       return;
     }
@@ -328,14 +324,14 @@
 
       Wyliodrin.schemed.parts = response.data;
 
-      $(window).trigger('loaded.wyliodrin.parts');
+      $rootScope.$emit('loaded.wyliodrin.parts');
     });
   }
 
   angular.module('MyApp', ['ngMaterial']).config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('red');
-  }).controller('AppCtrl', function ($http) {
-    loadParts($http);
+  }).controller('AppCtrl', function ($http, $rootScope) {
+    loadParts($http, $rootScope);
 
     this.toggleGrid = function () {
       $(grid[0]).toggle();
