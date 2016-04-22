@@ -298,6 +298,10 @@
   });
 
   angular.module('schemedApp', ['ngMaterial']).config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('deep-orange');
+    $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('red');
+  }).controller('AppCtrl', function () {
+    this.toggleGrid = function () {
+      $(grid[0]).toggle();
+    };
   });
 })(jQuery);
