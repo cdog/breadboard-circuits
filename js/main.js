@@ -236,42 +236,6 @@
     }).hide();
   });
 
-  $('#toggle-simulation').click(function (event) {
-    event.preventDefault();
-
-    editing = !editing;
-
-    $('.glyphicon', this).toggleClass('glyphicon-play glyphicon-stop');
-
-    group.classed('editing', editing);
-
-    if (editing) {
-      pushbutton
-        .on('mousedown', null)
-        .on('mouseup', null);
-
-      breadboard.call(drag);
-      aaBattery.call(drag);
-      lightBulb.call(drag);
-      pushbutton.call(drag);
-    } else {
-      breadboard.on('.drag', null);
-      aaBattery.on('.drag', null);
-      lightBulb.on('.drag', null);
-      pushbutton.on('.drag', null);
-
-      pushbutton
-        .on('mousedown', function () {
-          pushbutton.classed('pressed', true);
-          lightBulb.classed('off', false);
-        })
-        .on('mouseup', function () {
-          pushbutton.classed('pressed', false);
-          lightBulb.classed('off', true);
-        });
-    }
-  });
-
   function loadParts($http, $rootScope) {
     var parts = localStorage.getItem('parts');
 
@@ -321,6 +285,38 @@
 
     this.toggleGrid = function () {
       $(grid[0]).toggle();
+    };
+
+    this.toggleSimulation = function () {
+      editing = !editing;
+
+      group.classed('editing', editing);
+
+      if (editing) {
+        pushbutton
+          .on('mousedown', null)
+          .on('mouseup', null);
+
+        breadboard.call(drag);
+        aaBattery.call(drag);
+        lightBulb.call(drag);
+        pushbutton.call(drag);
+      } else {
+        breadboard.on('.drag', null);
+        aaBattery.on('.drag', null);
+        lightBulb.on('.drag', null);
+        pushbutton.on('.drag', null);
+
+        pushbutton
+          .on('mousedown', function () {
+            pushbutton.classed('pressed', true);
+            lightBulb.classed('off', false);
+          })
+          .on('mouseup', function () {
+            pushbutton.classed('pressed', false);
+            lightBulb.classed('off', true);
+          });
+      }
     };
 
     this.userCategory = '';
