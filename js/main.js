@@ -171,13 +171,16 @@
 
     var x = $q(function (resolve) {
       $rootScope.$on('loaded.wyliodrin.parts', function () {
-        $scope.categories = [];
+        var categories = [];
 
         angular.forEach(Wyliodrin.schemed.parts, function (value) {
-          $scope.categories.push({
+          categories.push({
             title: value.title[0]
           });
         });
+
+        $scope.category = categories[0].title;
+        $scope.categories = categories;
 
         resolve();
       });
