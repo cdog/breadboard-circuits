@@ -48,7 +48,7 @@
           <label>Category</label>
           <md-select ng-model="category" md-on-open="loadCategories()">
             <md-option ng-repeat="category in categories" value="{{ category.title }}">
-              <img src="{{ category.icon }}" alt="{{ category.title }}" ng-show="category.icon">
+              <img ng-src="{{ category.icon }}" alt="{{ category.title }}" ng-show="category.icon">
               {{ category.title }}
             </md-option>
           </md-select>
