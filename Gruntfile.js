@@ -3,7 +3,6 @@ module.exports = function (grunt) {
 
   require('jit-grunt')(grunt, {
     buildcontrol: 'grunt-build-control',
-    htmllint: 'grunt-html',
     migrate: 'grunt/migrate.js'
   });
 
@@ -22,12 +21,12 @@ module.exports = function (grunt) {
         options: {
           outputSourceFiles: true,
           sourceMap: true,
-          sourceMapFilename: 'html/assets/app/css/style.css.map',
+          sourceMapFilename: 'dist/assets/app/css/style.css.map',
           sourceMapURL: 'style.css.map',
           strictMath: true
         },
         files: {
-          'html/assets/app/css/style.css': 'less/style.less'
+          'dist/assets/app/css/style.css': 'less/style.less'
         }
       }
     },
@@ -39,7 +38,7 @@ module.exports = function (grunt) {
         ]
       },
       core: {
-        src: 'html/assets/app/css/*.css'
+        src: 'dist/assets/app/css/*.css'
       }
     },
     csscomb: {
@@ -47,8 +46,8 @@ module.exports = function (grunt) {
         config: 'less/.csscomb.json'
       },
       core: {
-        src: 'html/assets/app/css/style.css',
-        dest: 'html/assets/app/css/style.css'
+        src: 'dist/assets/app/css/style.css',
+        dest: 'dist/assets/app/css/style.css'
       }
     },
     csslint: {
@@ -56,7 +55,7 @@ module.exports = function (grunt) {
         csslintrc: 'less/.csslintrc'
       },
       core: {
-        src: 'html/assets/app/css/style.css'
+        src: 'dist/assets/app/css/style.css'
       }
     },
     cssmin: {
@@ -67,9 +66,9 @@ module.exports = function (grunt) {
       },
       core: {
         expand: true,
-        cwd: 'html/assets/app/css',
+        cwd: 'dist/assets/app/css',
         src: ['*.css', '!*.min.css'],
-        dest: 'html/assets/app/css',
+        dest: 'dist/assets/app/css',
         ext: '.min.css'
       }
     },
@@ -97,7 +96,7 @@ module.exports = function (grunt) {
           'js/load.js',
           'js/main.js'
         ],
-        dest: 'html/assets/app/js/application.js'
+        dest: 'dist/assets/app/js/application.js'
       }
     },
     uglify: {
@@ -109,14 +108,14 @@ module.exports = function (grunt) {
       },
       core: {
         src: '<%= concat.core.dest %>',
-        dest: 'html/assets/app/js/application.min.js'
+        dest: 'dist/assets/app/js/application.min.js'
       }
     },
     copy: {
       assets: {
         expand: true,
         src: 'assets/**',
-        dest: 'html'
+        dest: 'dist'
       },
       packages: {
         files: [
@@ -124,89 +123,60 @@ module.exports = function (grunt) {
             expand: true,
             cwd: 'node_modules/angular',
             src: '*',
-            dest: 'html/assets/vendor/angular'
+            dest: 'dist/assets/vendor/angular'
           },
           {
             expand: true,
             cwd: 'node_modules/angular-animate',
             src: '*',
-            dest: 'html/assets/vendor/angular-animate'
+            dest: 'dist/assets/vendor/angular-animate'
           },
           {
             expand: true,
             cwd: 'node_modules/angular-aria',
             src: '*',
-            dest: 'html/assets/vendor/angular-aria'
+            dest: 'dist/assets/vendor/angular-aria'
           },
           {
             expand: true,
             cwd: 'node_modules/angular-material',
             src: '*',
-            dest: 'html/assets/vendor/angular-material'
+            dest: 'dist/assets/vendor/angular-material'
           },
           {
             expand: true,
             cwd: 'node_modules/angular-messages',
             src: '*',
-            dest: 'html/assets/vendor/angular-messages'
+            dest: 'dist/assets/vendor/angular-messages'
           },
           {
             expand: true,
             cwd: 'node_modules/d3',
             src: ['d3.js', 'd3.min.js'],
-            dest: 'html/assets/vendor/d3'
+            dest: 'dist/assets/vendor/d3'
           },
           {
             expand: true,
             cwd: 'node_modules/handlebars/dist',
             src: '*',
-            dest: 'html/assets/vendor/handlebars'
+            dest: 'dist/assets/vendor/handlebars'
           },
           {
             expand: true,
             cwd: 'node_modules/jquery/dist',
             src: '*',
-            dest: 'html/assets/vendor/jquery'
+            dest: 'dist/assets/vendor/jquery'
           },
           {
             expand: true,
             cwd: 'node_modules/nprogress',
             src: ['nprogress.css', 'nprogress.js'],
-            dest: 'html/assets/vendor/nprogress'
+            dest: 'dist/assets/vendor/nprogress'
           }
         ]
       }
     },
-    env: {
-      build: {
-        JEKYLL_ENV: grunt.option('environment') || 'development'
-      }
-    },
-    jekyll: {
-      options: {
-        config: '_config.yml'
-      },
-      build: {},
-      serve: {
-        options: {
-          incremental: true,
-          serve: true
-        }
-      },
-      watch: {
-        options: {
-          incremental: true,
-          watch: true
-        }
-      }
-    },
-    htmllint: {
-      src: [
-        'dist/**/*.html',
-        '!dist/log/*.html'
-      ]
-    },
-    _htmlmin: {
+    htmlmin: {
       dist: {
         options: {
           collapseWhitespace: true,
@@ -217,12 +187,12 @@ module.exports = function (grunt) {
           removeComments: true
         },
         expand: true,
-        cwd: 'dist',
+        cwd: 'html',
         src: '**/*.html',
         dest: 'dist'
       }
     },
-    _watch: {
+    watch: {
       configFiles: {
         options: {
           reload: true
@@ -230,8 +200,8 @@ module.exports = function (grunt) {
         files: ['Gruntfile.js', 'package.json']
       },
       html: {
-        files: 'dist/**/*.html',
-        tasks: [/*'htmllint',*/ 'htmlmin']
+        files: 'html/**/*.html',
+        tasks: 'html'
       },
       js: {
         files: 'js/*.js',
@@ -241,13 +211,6 @@ module.exports = function (grunt) {
         files: 'less/**/*.less',
         tasks: 'css'
       }
-    },
-    concurrent: {
-      options: {
-        logConcurrentOutput: true
-      },
-      watch: ['_watch', 'jekyll:watch'],
-      serve: ['_watch', 'jekyll:serve']
     },
     buildcontrol: {
       options: {
@@ -265,35 +228,16 @@ module.exports = function (grunt) {
       options: {
         force: true
       },
-      assets: 'html/assets',
       dist: 'dist'
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.renameTask('htmlmin', '_htmlmin');
-
-  grunt.registerTask('htmlmin', function () {
-    // grunt.task.requires('env');
-
-    if (process.env.JEKYLL_ENV === 'production') {
-      grunt.task.run('_htmlmin');
-    }
-  });
-
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.renameTask('watch', '_watch');
-
-  grunt.registerTask('watch', ['env', 'concurrent:watch']);
-  grunt.registerTask('serve', ['env', 'concurrent:serve']);
-
   grunt.registerTask('assets', 'copy');
   grunt.registerTask('css', ['less', 'postcss', 'csscomb', 'csslint', 'cssmin']);
   grunt.registerTask('js', ['eslint', 'jscs', 'concat', 'uglify']);
-  grunt.registerTask('html', ['jekyll:build', /*'htmllint',*/ 'htmlmin']);
+  grunt.registerTask('html', 'htmlmin');
 
-  grunt.registerTask('build', ['env', 'assets', 'css', 'js', 'html']);
-  grunt.registerTask('test', ['clean', 'build']);
+  grunt.registerTask('build', ['assets', 'css', 'js', 'html']);
   grunt.registerTask('deploy', 'buildcontrol');
 
   grunt.registerTask('default', 'build');
