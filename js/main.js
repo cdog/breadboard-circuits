@@ -303,5 +303,12 @@
     this.toggleGrid = function () {
       $(grid[0]).toggle();
     };
+
+    this.userState = '';
+    this.states = ('ana are mere').split(' ').map(function (state) {
+      return {
+        abbrev: state
+      };
+    });
   });
 })(jQuery);
