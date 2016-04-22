@@ -37,7 +37,7 @@
     d3.select(this).classed('dragging', false);
   }
 
-  /*var drag = */d3.behavior.drag()
+  d3.behavior.drag()
     .origin(function () {
       return {
         x: d3.select(this).attr('x'),
@@ -137,19 +137,28 @@
     });
   }
 
-  angular.module('MyApp', ['ngMaterial']).config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('red');
-  }).controller('AppCtrl', function ($http, $rootScope) {
+  var schemedApp = angular.module('MyApp', [
+    'ngMaterial'
+  ]);
+
+  schemedApp.config(function ($mdThemingProvider) {
+    $mdThemingProvider
+      .theme('default')
+      .primaryPalette('blue')
+      .accentPalette('red');
+  });
+
+  schemedApp.controller('AppCtrl', function ($http, $rootScope, $scope, $q) {
     loadParts($http, $rootScope);
 
-    this.resetView = function () {
+    $scope.resetView = function () {
       zoom.scale(1);
       zoom.translate([0, 0]);
       pattern.attr('patternTransform', null);
       group.attr('transform', null);
     };
 
-    this.toggleGrid = function () {
+    $scope.toggleGrid = function () {
       grid.visible = !grid.visible;
 
       var visibility = grid.visible ? 'visible' : 'hidden';
@@ -157,12 +166,25 @@
       grid.style('visibility', visibility);
     };
 
-    this.userCategory = '';
+    $scope.category = null;
+    $scope.categories = null;
 
-    this.categories = ('Core Contrib').split(' ').map(function (category) {
-      return {
-        name: category
-      };
+    var x = $q(function (resolve) {
+      $rootScope.$on('loaded.wyliodrin.parts', function () {
+        $scope.categories = [];
+
+        angular.forEach(Wyliodrin.schemed.parts, function (value) {
+          $scope.categories.push({
+            title: value.title[0]
+          });
+        });
+
+        resolve();
+      });
     });
+
+    $scope.loadCategories = function () {
+      return $scope.categories || x;
+    };
   });
 })();

@@ -12,7 +12,7 @@
     <link href="assets/app/css/style.css" rel="stylesheet">
   </head>
   <body ng-app="MyApp" ng-controller="AppCtrl as ctrl" layout="column" ng-cloak>
-    <md-toolbar layout="row">
+    <md-toolbar layout="row" md-whiteframe="2">
       <div class="md-toolbar-tools">
         <h2>Breadboard Circuits</h2>
         <md-menu-bar>
@@ -30,10 +30,10 @@
           </md-menu>
         </md-menu-bar>
         <span flex></span>
-        <md-button aria-label="Reset View" ng-click="ctrl.resetView()">
+        <md-button aria-label="Reset View" ng-click="resetView()">
           Reset View
         </md-button>
-        <md-button aria-label="Toggle Grid" ng-click="ctrl.toggleGrid()">
+        <md-button aria-label="Toggle Grid" ng-click="toggleGrid()">
           Toggle Grid
         </md-button>
       </div>
@@ -45,9 +45,9 @@
         </md-toolbar>
         <md-input-container>
           <label>Category</label>
-          <md-select ng-model="ctrl.userCategory">
-            <md-option ng-repeat="category in ctrl.categories" value="{{ category.name }}">
-              {{ category.name }}
+          <md-select ng-model="category" md-on-open="loadCategories()">
+            <md-option ng-repeat="category in categories" value="{{ category.title }}">
+              {{ category.title }}
             </md-option>
           </md-select>
         </md-input-container>
