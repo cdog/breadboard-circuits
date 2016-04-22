@@ -15,7 +15,8 @@
     "circuits",
     "editor",
     "html5",
-    "schematic"
+    "schematic",
+    "wyliodrin"
   ],
   "author": "Cătălin Dogaru",
   "license": "MIT",
