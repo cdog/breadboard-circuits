@@ -228,14 +228,6 @@
       .attr('y2', Number(lightBulb.attr('y')) + 163);
   });
 
-  $('#field-search').keyup(function () {
-    var needle = $(this).val().toLowerCase();
-
-    $('.component-library .component-library-item').show().filter(function () {
-      return $('.caption', this).text().trim().toLowerCase().indexOf(needle) === -1;
-    }).hide();
-  });
-
   function loadParts($http, $rootScope) {
     var parts = localStorage.getItem('parts');
 
