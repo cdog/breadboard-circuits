@@ -4,22 +4,22 @@
 <svg version="1.1" baseProfile="tiny" id="svg2" xmlns:svg="http://www.w3.org/2000/svg"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28.8px" height="23.76px"
 	 viewBox="0 0 28.8 23.76" xml:space="preserve">
-<rect id="connector0pin" x="2.52" y="20.636" fill="#8C8C8C" width="2.16" height="3.124"/>
-<rect id="connector1pin" x="9.72" y="20.636" fill="#8C8C8C" width="2.16" height="3.124"/>
-<rect id="connector2pin" x="16.919" y="20.636" fill="#8C8C8C" width="2.16" height="3.124"/>
-<rect id="connector3pin" x="24.121" y="20.636" fill="#8C8C8C" width="2.159" height="3.124"/>
-<rect id="connector4pin" x="24.121" fill="#8C8C8C" width="2.159" height="3.125"/>
-<rect id="connector5pin" x="16.919" fill="#8C8C8C" width="2.16" height="3.125"/>
-<rect id="connector6pin" x="9.72" fill="#8C8C8C" width="2.16" height="3.125"/>
-<rect id="connector7pin" x="2.52" fill="#8C8C8C" width="2.16" height="3.125"/>
-<rect id="connector0terminal" x="2.52" y="21.601" fill="#8C8C8C" width="2.16" height="2.159"/>
-<rect id="connector1terminal" x="9.72" y="21.601" fill="#8C8C8C" width="2.16" height="2.159"/>
-<rect id="connector2terminal" x="16.919" y="21.601" fill="#8C8C8C" width="2.16" height="2.159"/>
-<rect id="connector3terminal" x="24.121" y="21.601" fill="#8C8C8C" width="2.159" height="2.159"/>
-<rect id="connector4terminal" x="24.121" fill="#8C8C8C" width="2.159" height="2.16"/>
-<rect id="connector5terminal" x="16.919" fill="#8C8C8C" width="2.16" height="2.16"/>
-<rect id="connector6terminal" x="9.72" fill="#8C8C8C" width="2.16" height="2.16"/>
-<rect id="connector7terminal" x="2.52" fill="#8C8C8C" width="2.16" height="2.16"/>
+<rect id="connector1pin" x="2.52" y="20.636" fill="#8C8C8C" width="2.16" height="3.124"/>
+<rect id="connector2pin" x="9.72" y="20.636" fill="#8C8C8C" width="2.16" height="3.124"/>
+<rect id="connector3pin" x="16.919" y="20.636" fill="#8C8C8C" width="2.16" height="3.124"/>
+<rect id="connector4pin" x="24.121" y="20.636" fill="#8C8C8C" width="2.159" height="3.124"/>
+<rect id="connector5pin" x="24.121" fill="#8C8C8C" width="2.159" height="3.125"/>
+<rect id="connector6pin" x="16.919" fill="#8C8C8C" width="2.16" height="3.125"/>
+<rect id="connector7pin" x="9.72" fill="#8C8C8C" width="2.16" height="3.125"/>
+<rect id="connector8pin" x="2.52" fill="#8C8C8C" width="2.16" height="3.125"/>
+<rect id="connector1terminal" x="2.52" y="21.601" fill="#8C8C8C" width="2.16" height="2.159"/>
+<rect id="connector2terminal" x="9.72" y="21.601" fill="#8C8C8C" width="2.16" height="2.159"/>
+<rect id="connector3terminal" x="16.919" y="21.601" fill="#8C8C8C" width="2.16" height="2.159"/>
+<rect id="connector4terminal" x="24.121" y="21.601" fill="#8C8C8C" width="2.159" height="2.159"/>
+<rect id="connector5terminal" x="24.121" fill="#8C8C8C" width="2.159" height="2.16"/>
+<rect id="connector6terminal" x="16.919" fill="#8C8C8C" width="2.16" height="2.16"/>
+<rect id="connector7terminal" x="9.72" fill="#8C8C8C" width="2.16" height="2.16"/>
+<rect id="connector8terminal" x="2.52" fill="#8C8C8C" width="2.16" height="2.16"/>
 <rect id="rect20" x="2.52" y="18.95" fill="#8C8C8C" width="2.16" height="4.81"/>
 <rect id="rect22" x="9.72" y="18.95" fill="#8C8C8C" width="2.16" height="4.81"/>
 <rect id="rect24" x="16.919" y="18.95" fill="#8C8C8C" width="2.16" height="4.81"/>

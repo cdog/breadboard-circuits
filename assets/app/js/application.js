@@ -5,63 +5,13 @@ if (typeof window.Wyliodrin === 'undefined') {
 (function (Wyliodrin) {
   'use strict';
 
-  Wyliodrin.breadboard = {
+  Wyliodrin.schemed = {
     parts: [],
     partsPath: 'assets/app/parts/parts.json'
   };
 })(Wyliodrin);
 
-(function ($) {
-  'use strict';
-
-  function loadParts() {
-    var parts = localStorage.getItem('parts');
-
-    if (parts !== null) {
-      Wyliodrin.breadboard.parts = JSON.parse(parts);
-
-      $(window).trigger('loaded.wyliodrin.parts');
-
-      return;
-    }
-
-    NProgress.configure({
-      showSpinner: false
-    });
-
-    $.ajax({
-      success: function (data) {
-        try {
-          localStorage.setItem('parts', JSON.stringify(data));
-        } catch (exception) {
-          // Nothing to do.
-        }
-
-        Wyliodrin.breadboard.parts = data;
-
-        $(window).trigger('loaded.wyliodrin.parts');
-      },
-      url: Wyliodrin.breadboard.partsPath,
-      xhr: function () {
-        var xhr = new window.XMLHttpRequest();
-
-        xhr.addEventListener('progress', function (event) {
-          if (event.lengthComputable) {
-            var progress = event.loaded / event.total;
-
-            NProgress.set(progress);
-          }
-        }, false);
-
-        return xhr;
-      }
-    });
-  }
-
-  loadParts();
-})(jQuery);
-
-(function ($) {
+(function () {
   'use strict';
 
   var canvasId = 'canvas';
@@ -73,12 +23,6 @@ if (typeof window.Wyliodrin === 'undefined') {
   var gridFill = 'none';
   var gridStroke = '#ddd';
   var gridStrokeWidth = 1;
-
-  var editing = true;
-
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
 
   function zoomed() {
     pattern.attr('patternTransform', 'translate(' + d3.event.translate + ') scale(' + d3.event.scale + ')');
@@ -100,54 +44,13 @@ if (typeof window.Wyliodrin === 'undefined') {
     d3.select(this)
       .attr('x', d3.event.x)
       .attr('y', d3.event.y);
-
-    line1
-      .attr('x1', Number(pushbutton.attr('x')) + 23.5)
-      .attr('y1', Number(pushbutton.attr('y')) + .5)
-      .attr('x2', Number(lightBulb.attr('x')) + 45)
-      .attr('y2', Number(lightBulb.attr('y')) + 163);
-
-    line2
-      .attr('x1', Number(aaBattery.attr('x')) + .5)
-      .attr('y1', Number(aaBattery.attr('y')) + 25)
-      .attr('x2', Number(pushbutton.attr('x')) + 4.5)
-      .attr('y2', Number(pushbutton.attr('y')) + 29.5);
-
-    line3
-      .attr('x1', Number(aaBattery.attr('x')) + 163.5)
-      .attr('y1', Number(aaBattery.attr('y')) + 25)
-      .attr('x2', Number(lightBulb.attr('x')) + 55)
-      .attr('y2', Number(lightBulb.attr('y')) + 163);
   }
 
   function dragended() {
     d3.select(this).classed('dragging', false);
   }
 
-  function loadComponent(url, component) {
-    var dfd = new jQuery.Deferred();
-
-    d3.xml(url, 'image/svg+xml', function (xml) {
-      components[component] = xml.documentElement;
-
-      dfd.resolve();
-    });
-
-    return dfd.promise();
-  }
-
-  function loadComponents() {
-    var dfd = [];
-
-    dfd.push(loadComponent('assets/app/img/components/aa-battery.svg', 'aaBattery'));
-    dfd.push(loadComponent('assets/app/img/components/breadboard.svg', 'breadboard'));
-    dfd.push(loadComponent('assets/app/img/components/light-bulb.svg', 'lightBulb'));
-    dfd.push(loadComponent('assets/app/img/components/pushbutton.svg', 'pushbutton'));
-
-    return dfd;
-  }
-
-  var drag = d3.behavior.drag()
+  d3.behavior.drag()
     .origin(function () {
       return {
         x: d3.select(this).attr('x'),
@@ -208,157 +111,139 @@ if (typeof window.Wyliodrin === 'undefined') {
     .attr('height', canvasHeight)
     .attr('fill', 'url(#' + gridId + ')');
 
-  var group = canvas.append('g').
-    classed('editing', editing);
+  grid.visible = true;
 
-  var components = {};
-  var aaBattery;
-  var breadboard;
-  var lightBulb;
-  var pushbutton;
-  var line1;
-  var line2;
-  var line3;
+  var group = canvas.append('g');
 
-  $.when.apply($, loadComponents()).then(function () {
-    var node;
+  function loadParts($http, $rootScope, $scope) {
+    var parts = localStorage.getItem('parts');
 
-    node = group.node().appendChild(components.breadboard);
+    if (parts !== null) {
+      Wyliodrin.schemed.parts = JSON.parse(parts);
 
-    breadboard = d3.select(node)
-      .attr('class', 'component')
-      .attr('width', 660)
-      .attr('height', 220)
-      .attr('x', getRandomInt(0, $(canvas[0]).width() - 660))
-      .attr('y', getRandomInt(0, $(canvas[0]).height() - 220))
-      .call(drag);
+      $rootScope.$emit('loaded.wyliodrin.parts');
 
-    node = group.node().appendChild(components.aaBattery);
+      return;
+    }
 
-    aaBattery = d3.select(node)
-      .attr('class', 'component')
-      .attr('width', 164)
-      .attr('height', 50)
-      .attr('x', getRandomInt(0, $(canvas[0]).width() - 164))
-      .attr('y', getRandomInt(0, $(canvas[0]).height() - 50))
-      .call(drag);
+    $http.get(Wyliodrin.schemed.partsPath, {
+      eventHandlers: {
+        progress: function (event) {
+          if (event.lengthComputable) {
+            var progress = event.loaded / event.total;
 
-    node = group.node().appendChild(components.lightBulb);
+            $scope.progress = progress * 100;
+          }
+        }
+      }
+    }).then(function (response) {
+      try {
+        localStorage.setItem('parts', JSON.stringify(response.data));
+      } catch (exception) {
+        // Nothing to do.
+      }
 
-    lightBulb = d3.select(node)
-      .attr('class', 'component off')
-      .attr('width', 100)
-      .attr('height', 164)
-      .attr('x', getRandomInt(0, $(canvas[0]).width() - 100))
-      .attr('y', getRandomInt(0, $(canvas[0]).height() - 164))
-      .call(drag);
+      Wyliodrin.schemed.parts = response.data;
 
-    node = group.node().appendChild(components.pushbutton);
+      $rootScope.$emit('loaded.wyliodrin.parts');
+    });
+  }
 
-    pushbutton = d3.select(node)
-      .attr('class', 'component')
-      .attr('width', 28)
-      .attr('height', 30)
-      .attr('x', getRandomInt(0, $(canvas[0]).width() - 28))
-      .attr('y', getRandomInt(0, $(canvas[0]).height() - 30))
-      .call(drag);
+  function flattenCategory(elem) {
+    var parts = [];
 
-    line1 = group.append('line')
-      .attr('stroke', '#f00')
-      .attr('stroke-width', 3)
-      .attr('stroke-linecap', 'round')
-      .attr('x1', Number(pushbutton.attr('x')) + 23.5)
-      .attr('y1', Number(pushbutton.attr('y')) + .5)
-      .attr('x2', Number(lightBulb.attr('x')) + 45)
-      .attr('y2', Number(lightBulb.attr('y')) + 163);
+    angular.forEach(elem, function (value, key) {
+      var part = {
+        key: key,
+        title: value.title,
+        type: value.type
+      };
 
-    line2 = group.append('line')
-      .attr('stroke', '#f00')
-      .attr('stroke-width', 3)
-      .attr('stroke-linecap', 'round')
-      .attr('x1', Number(aaBattery.attr('x')) + .5)
-      .attr('y1', Number(aaBattery.attr('y')) + 25)
-      .attr('x2', Number(pushbutton.attr('x')) + 4.5)
-      .attr('y2', Number(pushbutton.attr('y')) + 29.5);
+      if (value.type === 'part') {
+        part.id = value.id;
+        part.icon = 'assets/app/parts/svg/icons/' + value.views.icon;
+      }
 
-    line3 = group.append('line')
-      .attr('stroke', '#f00')
-      .attr('stroke-width', 3)
-      .attr('stroke-linecap', 'round')
-      .attr('x1', Number(aaBattery.attr('x')) + 163.5)
-      .attr('y1', Number(aaBattery.attr('y')) + 25)
-      .attr('x2', Number(lightBulb.attr('x')) + 55)
-      .attr('y2', Number(lightBulb.attr('y')) + 163);
+      parts.push(part);
+
+      if (value.type === 'group') {
+        parts = parts.concat(flattenCategory(value.parts));
+      }
+    });
+
+    return parts;
+  }
+
+  var schemedApp = angular.module('MyApp', [
+    'ngMaterial'
+  ]);
+
+  schemedApp.config(function ($mdThemingProvider) {
+    $mdThemingProvider
+      .theme('default')
+      .primaryPalette('blue')
+      .accentPalette('red');
   });
 
-  $('#field-search').keyup(function () {
-    var needle = $(this).val().toLowerCase();
+  schemedApp.controller('AppCtrl', function ($http, $rootScope, $scope, $q) {
+    loadParts($http, $rootScope, $scope);
 
-    $('.component-library .component-library-item').show().filter(function () {
-      return $('.caption', this).text().trim().toLowerCase().indexOf(needle) === -1;
-    }).hide();
-  });
+    $scope.resetView = function () {
+      zoom.scale(1);
+      zoom.translate([0, 0]);
+      pattern.attr('patternTransform', null);
+      group.attr('transform', null);
+    };
 
-  ace.edit('code-editor');
+    $scope.toggleGrid = function () {
+      grid.visible = !grid.visible;
 
-  $('#reset-view').click(function (event) {
-    event.preventDefault();
+      var visibility = grid.visible ? 'visible' : 'hidden';
 
-    zoom.scale(1);
-    zoom.translate([0, 0]);
-    pattern.attr('patternTransform', null);
-    group.attr('transform', null);
-  });
+      grid.style('visibility', visibility);
+    };
 
-  $('#toggle-grid').click(function (event) {
-    event.preventDefault();
+    $scope.category = null;
+    $scope.categories = null;
 
-    $(grid[0]).toggle();
-  });
+    var x = $q(function (resolve) {
+      $rootScope.$on('loaded.wyliodrin.parts', function () {
+        var categories = [];
 
-  $('#toggle-simulation').click(function (event) {
-    event.preventDefault();
+        angular.forEach(Wyliodrin.schemed.parts, function (value, key) {
+          var category = {
+            key: key,
+            title: value.title
+          };
 
-    editing = !editing;
+          if (value.icon !== undefined) {
+            category.icon = 'assets/app/parts/icons/' + value.icon;
+          }
 
-    $('.glyphicon', this).toggleClass('glyphicon-play glyphicon-stop');
-
-    group.classed('editing', editing);
-
-    if (editing) {
-      pushbutton
-        .on('mousedown', null)
-        .on('mouseup', null);
-
-      breadboard.call(drag);
-      aaBattery.call(drag);
-      lightBulb.call(drag);
-      pushbutton.call(drag);
-    } else {
-      breadboard.on('.drag', null);
-      aaBattery.on('.drag', null);
-      lightBulb.on('.drag', null);
-      pushbutton.on('.drag', null);
-
-      pushbutton
-        .on('mousedown', function () {
-          pushbutton.classed('pressed', true);
-          lightBulb.classed('off', false);
-        })
-        .on('mouseup', function () {
-          pushbutton.classed('pressed', false);
-          lightBulb.classed('off', true);
+          categories.push(category);
         });
-    }
-  });
 
-  $('.navbar .navbar-nav > li').click(function (event) {
-    if ($(this).hasClass('disabled')) {
-      event.stopPropagation();
-    }
-  });
+        $scope.category = categories[2].key;
+        $scope.categories = categories;
 
-  $(window).on('loaded.wyliodrin.parts', function () {
-    $('[data-target="#modal-components"]').parent().removeClass('disabled');
+        resolve();
+      });
+    });
+
+    $scope.loadCategories = function () {
+      return $scope.categories || x;
+    };
+
+    $scope.parts = null;
+
+    $scope.loadCategory = function () {
+      if ($scope.category === null) {
+        return;
+      }
+
+      $scope.parts = flattenCategory(Wyliodrin.schemed.parts[$scope.category].parts);
+    };
+
+    $scope.$watch('category', $scope.loadCategory);
   });
-})(jQuery);
+})();

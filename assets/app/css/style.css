@@ -1,71 +1,24 @@
-#viewport {
-  bottom: 0;
-  left: 0;
+.progress {
   position: absolute;
-  right: 0;
-  top: 50px;
+  z-index: 10;
 }
-#canvas {
-  background-color: #f8f8f8;
-  display: block;
-}
-#component-inspector.active .placeholder {
-  display: none;
-}
-#modal-code-editor .modal-body {
-  height: 480px;
-}
-#code-editor {
+#viewport {
   bottom: 0;
   left: 0;
   position: absolute;
   right: 0;
   top: 0;
 }
-.glyphicon-lg {
-  font-size: 24px;
-}
-.navbar-default {
-  background-color: #fff;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, .075);
-}
-.navbar-static-top {
-  border-bottom-width: 0;
-}
-.navbar-nav > li > a {
-  outline: 0;
-}
-.thumbnail:hover {
-  text-decoration: none;
-}
-.thumbnail .caption {
-  border-top: 1px solid #eee;
-  font-size: 16px;
-  margin: 4px -4px -4px;
-  overflow: hidden;
-  padding: 8px 4px;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.embed-responsive {
+#canvas {
   background-color: #f8f8f8;
+  display: block;
 }
-.embed-responsive .embed-responsive-item {
-  background-origin: content-box;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  padding: 15px;
+md-divider {
+  margin-top: 10px;
 }
-.well-lg {
-  padding: 120px 60px;
-}
-@media (min-width: 768px) {
-  .modal-fluid {
-    margin: 30px;
-    width: auto;
-  }
+.md-avatar {
+  border-radius: 0;
+  vertical-align: middle;
 }
 .editing .component {
   cursor: move !important;

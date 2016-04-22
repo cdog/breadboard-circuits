@@ -1,0 +1,104 @@
+{
+  "_args": [
+    [
+      "angular-material@^1.0.7",
+      "/Users/cdog/Workspace/wyliodrin/breadboard-circuits"
+    ]
+  ],
+  "_from": "angular-material@>=1.0.7 <2.0.0",
+  "_id": "angular-material@1.0.7",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/angular-material",
+  "_nodeVersion": "5.6.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/angular-material-1.0.7.tgz_1459549439709_0.5092582132201642"
+  },
+  "_npmUser": {
+    "email": "angular-core+npm@google.com",
+    "name": "angularcore"
+  },
+  "_npmVersion": "3.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "angular-material",
+    "raw": "angular-material@^1.0.7",
+    "rawSpec": "^1.0.7",
+    "scope": null,
+    "spec": ">=1.0.7 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-material/-/angular-material-1.0.7.tgz",
+  "_shasum": "c8769b59c6a222d20576d0547b24603aa1722ea3",
+  "_shrinkwrap": null,
+  "_spec": "angular-material@^1.0.7",
+  "_where": "/Users/cdog/Workspace/wyliodrin/breadboard-circuits",
+  "bugs": {
+    "url": "https://github.com/angular/material/issues"
+  },
+  "dependencies": {},
+  "description": "This repo is for distribution on `npm` and `bower`. The source for this module is in the [main Angular Material repo](https://github.com/angular/material). Please file issues and pull requests against that repo.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "c8769b59c6a222d20576d0547b24603aa1722ea3",
+    "tarball": "https://registry.npmjs.org/angular-material/-/angular-material-1.0.7.tgz"
+  },
+  "format": "cjs",
+  "gitHead": "8a7e717a542200a2d1fb0deafbc7598371690683",
+  "homepage": "https://material.angularjs.org",
+  "jspm": {
+    "dependencies": {
+      "angular": "github:angular/bower-angular@^1.5.0",
+      "angular-animate": "github:angular/bower-angular-animate@^1.5.0",
+      "angular-aria": "github:angular/bower-angular-aria@^1.5.0",
+      "angular-messages": "github:angular/bower-angular-messages@^1.5.0",
+      "css": "systemjs/plugin-css@^0.1.9"
+    },
+    "peerDependencies": {},
+    "shim": {
+      "angular-material": {
+        "deps": []
+      }
+    }
+  },
+  "keywords": [
+    "angular",
+    "material",
+    "browser",
+    "client-side"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/angular/material/blob/master/LICENSE"
+    }
+  ],
+  "main": "index",
+  "maintainers": [
+    {
+      "email": "angular-core+npm@google.com",
+      "name": "angularcore"
+    }
+  ],
+  "name": "angular-material",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-aria": "^1.5.0",
+    "angular-messages": "^1.5.0"
+  },
+  "readme": "ERROR: No README data found!",
+  "registry": "github",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/angular/material.git"
+  },
+  "scripts": {},
+  "version": "1.0.7"
+}
