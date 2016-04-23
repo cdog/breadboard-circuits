@@ -8,8 +8,8 @@
     <meta name="author" content="Cătălin Dogaru">
     <link rel="icon" href="favicon.ico">
     <title>Breadboard Circuits &middot; An HTML5 schematic editor for the web.</title>
-    <link href="assets/vendor/angular-material/angular-material.css" rel="stylesheet">
-    <link href="assets/app/css/style.css" rel="stylesheet">
+    <link href="assets/vendor/angular-material/angular-material.min.css" rel="stylesheet">
+    <link href="assets/app/css/style.min.css" rel="stylesheet">
   </head>
   <body ng-app="MyApp" ng-controller="AppCtrl as ctrl" layout="column" ng-cloak>
     <md-progress-linear md-mode="determinate" class="md-accent progress" value="{{ progress }}" ng-show="progress < 100"></md-progress-linear>
@@ -65,7 +65,7 @@
             <label>Category</label>
             <md-select ng-model="category" md-on-open="loadCategories()">
               <md-option ng-repeat="category in categories" value="{{ category.key }}">
-                <img ng-src="{{ category.icon }}" alt="{{ category.title }}" ng-show="category.icon">
+                <img ng-src="{{ category.icon }}" alt="{{ category.title }}" ng-if="category.icon">
                 {{ category.title }}
               </md-option>
             </md-select>
