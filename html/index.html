@@ -78,7 +78,7 @@
               <md-subheader class="md-no-sticky">{{ part.title }}</md-subheader>
             </div>
             <div ng-if="part.type === 'part'">
-              <md-list-item ng-click="null">
+              <md-list-item ng-click="null" ng-mouseenter="inspect(part.id)" ng-mouseleave="deinspect()">
                 <img ng-src="{{ part.icon }}" alt="{{ part.title }}" class="md-avatar">
                 <p>{{ part.title }}</p>
               </md-list-item>
@@ -93,6 +93,13 @@
         <md-toolbar class="md-hue-3">
           <h1 class="md-toolbar-tools">Inspector</h1>
         </md-toolbar>
+        <md-content class="md-padding" ng-show="part === null">
+          <p class="md-body-1">Hover over a thumbnail to inspect a part.</p>
+        </md-content>
+        <md-content class="md-padding" ng-model="part">
+          <h4 class="md-subhead">{{ part.title }}</h4>
+          <p class="md-body-1">{{ part.description }}</p>
+        </md-content>
       </md-sidenav>
     </div>
     <script src="assets/vendor/angular/angular.min.js"></script>

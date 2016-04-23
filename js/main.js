@@ -161,6 +161,28 @@
     return parts;
   }
 
+  function _findPart(group, id) {
+    if (group instanceof Array) {
+      for (var i = 0; i < group.length; i++) {
+        var part = _findPart(group[i], id);
+
+        if (part !== false) {
+          return part;
+        }
+      }
+    }
+
+    if (group.type === 'group') {
+      return _findPart(group.parts, id);
+    }
+
+    return group.id === id ? group : false;
+  }
+
+  function findPart(id) {
+    return _findPart(Wyliodrin.schemed.parts, id);
+  }
+
   var schemedApp = angular.module('MyApp', [
     'ngMaterial'
   ]);
@@ -232,5 +254,20 @@
     };
 
     $scope.$watch('category', $scope.loadCategory);
+
+    $scope.part = null;
+
+    $scope.inspect = function (id) {
+      var part = findPart(id);
+
+      $scope.part = {
+        description: part.description,
+        title: part.title
+      };
+    };
+
+    $scope.deinspect = function () {
+      $scope.part = null;
+    };
   });
 })();
