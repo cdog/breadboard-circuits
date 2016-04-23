@@ -71,14 +71,14 @@
             </md-select>
           </md-input-container>
         </div>
-        <md-list>
+        <md-list ng-mouseleave="deinspect()">
           <div ng-repeat="part in parts">
             <div ng-if="part.type === 'group'">
               <md-divider></md-divider>
               <md-subheader class="md-no-sticky">{{ part.title }}</md-subheader>
             </div>
             <div ng-if="part.type === 'part'">
-              <md-list-item ng-click="null" ng-mouseenter="inspect(part.id)" ng-mouseleave="deinspect()">
+              <md-list-item ng-click="null" ng-mouseenter="inspect(part.id)">
                 <img ng-src="{{ part.icon }}" alt="{{ part.title }}" class="md-avatar">
                 <p>{{ part.title }}</p>
               </md-list-item>
