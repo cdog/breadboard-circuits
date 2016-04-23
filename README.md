@@ -46,6 +46,4 @@ $ DEBUG=migrate:inspect grunt migrate # inspect migrated data
 * clean
 * deploy
 * migrate
-* serve
-* test
 * watch
