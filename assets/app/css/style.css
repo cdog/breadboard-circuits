@@ -22,6 +22,18 @@ md-list-item .md-list-item-inner .md-avatar {
 md-list-item .md-list-item-inner p {
   line-height: 1.2;
 }
+.md-title {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.md-subhead {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+md-chips .md-chips {
+  box-shadow: none;
+}
 .editing .component {
   cursor: move !important;
 }
