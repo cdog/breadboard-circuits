@@ -262,6 +262,8 @@
 
       $scope.part = {
         description: part.description,
+        properties: part.properties,
+        tags: part.tags,
         title: part.title
       };
     };
