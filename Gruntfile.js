@@ -153,24 +153,6 @@ module.exports = function (grunt) {
             cwd: 'node_modules/d3',
             src: ['d3.js', 'd3.min.js'],
             dest: 'dist/assets/vendor/d3'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/handlebars/dist',
-            src: '*',
-            dest: 'dist/assets/vendor/handlebars'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/jquery/dist',
-            src: '*',
-            dest: 'dist/assets/vendor/jquery'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/nprogress',
-            src: ['nprogress.css', 'nprogress.js'],
-            dest: 'dist/assets/vendor/nprogress'
           }
         ]
       }
