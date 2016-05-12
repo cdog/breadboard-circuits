@@ -136,31 +136,6 @@
     });
   }
 
-  function flattenCategory(elem) {
-    var parts = [];
-
-    angular.forEach(elem, function (value, key) {
-      var part = {
-        key: key,
-        title: value.title,
-        type: value.type
-      };
-
-      if (value.type === 'part') {
-        part.id = value.id;
-        part.icon = 'assets/app/parts/svg/icons/' + value.views.icon;
-      }
-
-      parts.push(part);
-
-      if (value.type === 'group') {
-        parts = parts.concat(flattenCategory(value.parts));
-      }
-    });
-
-    return parts;
-  }
-
   function _findPart(group, id) {
     if (group instanceof Array) {
       for (var i = 0; i < group.length; i++) {
@@ -250,7 +225,7 @@
         return;
       }
 
-      $scope.parts = flattenCategory(Wyliodrin.schemed.parts[$scope.category].parts);
+      $scope.parts = Wyliodrin.schemed.parts[$scope.category].parts;
     };
 
     $scope.$watch('category', $scope.loadCategory);

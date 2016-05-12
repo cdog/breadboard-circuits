@@ -71,20 +71,18 @@
             </md-select>
           </md-input-container>
         </div>
-        <md-list ng-mouseleave="deinspect()">
-          <div ng-repeat="part in parts">
-            <div ng-if="part.type === 'group'">
-              <md-divider></md-divider>
-              <md-subheader class="md-no-sticky">{{ part.title }}</md-subheader>
-            </div>
-            <div ng-if="part.type === 'part'">
-              <md-list-item ng-click="null" ng-mouseenter="inspect(part.id)">
-                <img ng-src="{{ part.icon }}" alt="{{ part.title }}" class="md-avatar">
+        <md-divider></md-divider>
+        <md-content>
+          <section ng-repeat="group in parts">
+            <md-subheader>{{ group.title }}</md-subheader>
+            <md-list ng-mouseleave="deinspect()">
+              <md-list-item ng-repeat="part in group.parts" ng-click="null" ng-mouseenter="inspect(part.id)">
+                <img ng-src="assets/app/parts/svg/icons/{{ part.views.icon }}" alt="{{ part.title }}" class="md-avatar">
                 <p>{{ part.title }}</p>
               </md-list-item>
-            </div>
-          </div>
-        </md-list>
+            </md-list>
+          </section>
+        </md-content>
       </md-sidenav>
       <md-content flex>
         <div id="viewport"></div>
