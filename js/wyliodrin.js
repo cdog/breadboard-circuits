@@ -5,7 +5,7 @@ if (typeof window.Wyliodrin === 'undefined') {
 (function (Wyliodrin) {
   'use strict';
 
-  Wyliodrin.schemed = {
+  Wyliodrin.bc = {
     parts: [],
     partsPath: 'assets/app/parts/parts.json'
   };

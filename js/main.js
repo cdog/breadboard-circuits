@@ -106,14 +106,14 @@
     var parts = localStorage.getItem('parts');
 
     if (parts !== null) {
-      Wyliodrin.schemed.parts = JSON.parse(parts);
+      Wyliodrin.bc.parts = JSON.parse(parts);
 
-      $rootScope.$emit('loaded.wyliodrin.parts');
+      $rootScope.$emit('bc:library:loaded');
 
       return;
     }
 
-    $http.get(Wyliodrin.schemed.partsPath, {
+    $http.get(Wyliodrin.bc.partsPath, {
       eventHandlers: {
         progress: function (event) {
           if (event.lengthComputable) {
@@ -130,9 +130,9 @@
         // Nothing to do.
       }
 
-      Wyliodrin.schemed.parts = response.data;
+      Wyliodrin.bc.parts = response.data;
 
-      $rootScope.$emit('loaded.wyliodrin.parts');
+      $rootScope.$emit('bc:library:loaded');
     });
   }
 
@@ -155,21 +155,21 @@
   }
 
   function findPart(id) {
-    return _findPart(Wyliodrin.schemed.parts, id);
+    return _findPart(Wyliodrin.bc.parts, id);
   }
 
-  var schemedApp = angular.module('MyApp', [
+  var bcApp = angular.module('MyApp', [
     'ngMaterial'
   ]);
 
-  schemedApp.config(function ($mdThemingProvider) {
+  bcApp.config(function ($mdThemingProvider) {
     $mdThemingProvider
       .theme('default')
       .primaryPalette('blue')
       .accentPalette('red');
   });
 
-  schemedApp.controller('AppCtrl', function ($http, $rootScope, $scope, $q) {
+  bcApp.controller('AppCtrl', function ($http, $rootScope, $scope, $q) {
     loadParts($http, $rootScope, $scope);
 
     $scope.resetView = function () {
@@ -190,11 +190,11 @@
     $scope.category = null;
     $scope.categories = null;
 
-    var x = $q(function (resolve) {
-      $rootScope.$on('loaded.wyliodrin.parts', function () {
+    var q = $q(function (resolve) {
+      $rootScope.$on('bc:library:loaded', function () {
         var categories = [];
 
-        angular.forEach(Wyliodrin.schemed.parts, function (value, key) {
+        angular.forEach(Wyliodrin.bc.parts, function (value, key) {
           var category = {
             key: key,
             title: value.title
@@ -215,7 +215,7 @@
     });
 
     $scope.loadCategories = function () {
-      return $scope.categories || x;
+      return $scope.categories || q;
     };
 
     $scope.parts = null;
@@ -225,7 +225,7 @@
         return;
       }
 
-      $scope.parts = Wyliodrin.schemed.parts[$scope.category].parts;
+      $scope.parts = Wyliodrin.bc.parts[$scope.category].parts;
     };
 
     $scope.$watch('category', $scope.loadCategory);

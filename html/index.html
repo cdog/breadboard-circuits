@@ -92,13 +92,13 @@
           <h1 class="md-toolbar-tools">Inspector</h1>
         </md-toolbar>
         <md-content class="md-padding" ng-show="part === null">
-          <p class="md-body-1">Hover over a thumbnail to inspect a part.</p>
+          <p class="md-body-1">Hover over a thumbnail to inspect any part.</p>
         </md-content>
         <md-content class="md-padding" ng-model="part" ng-show="part">
           <h4 class="md-title">{{ part.title }}</h4>
           <p class="md-body-1">{{ part.description }}</p>
           <h5 class="md-subhead">Properties</h5>
-          <table>
+          <table class="md-body-1">
             <tbody>
               <tr ng-repeat="property in part.properties">
                 <td>{{ property.name }}</td>
