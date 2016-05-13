@@ -55,16 +55,38 @@ md-chips {
   }
 }
 
-md-sidenav > md-toolbar {
-  background-image: linear-gradient(to bottom, #fefefe 0%, #ddd 100%);
-  background-repeat: repeat-x;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #fafafa;
-  min-height: 40px;
+md-sidenav {
+  background-color: #fafafa;
 
-  .md-toolbar-tools {
+  > md-toolbar {
+    background-image: linear-gradient(to bottom, #fefefe 0%, #ddd 100%);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #aaa;
+    border-top: 1px solid #fafafa;
+    min-height: 40px;
+
+    .md-toolbar-tools {
+      color: #333;
+      font-size: 14px;
+      height: 40px;
+    }
+  }
+
+  md-divider {
+    border-top-color: #aaa;
+  }
+
+  .md-subheader {
+    background-color: #ddd;
+    border-bottom: 1px solid #aaa;
+    border-top: 1px solid #fafafa;
     color: #333;
-    font-size: 14px;
-    height: 40px;
+    font-size: 11px;
+    font-weight: 400;
+
+    .md-subheader-inner {
+      padding-bottom: 8px;
+      padding-top: 8px;
+    }
   }
 }
