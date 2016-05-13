@@ -21,6 +21,8 @@
 }
 
 md-list {
+  font-size: 14px;
+
   md-divider {
     margin-top: 10px;
   }
@@ -28,8 +30,14 @@ md-list {
 
 md-list-item {
   .md-list-item-inner {
+    min-height: 44px;
+
     .md-avatar {
       border-radius: 0;
+      height: 32px;
+      margin-bottom: 6px;
+      margin-top: 6px;
+      width: 32px;
     }
 
     p {
@@ -39,6 +47,7 @@ md-list-item {
 }
 
 .md-title {
+  color: #333;
   margin-bottom: 10px;
   margin-top: 10px;
 }
@@ -52,6 +61,15 @@ md-list-item {
 md-chips {
   .md-chips {
     box-shadow: none;
+
+    .md-chip {
+      border-radius: 12px;
+      font-size: 11px;
+      height: 24px;
+      line-height: 23px;
+      padding-bottom: 1px;
+      text-transform: lowercase;
+    }
   }
 }
 
@@ -89,4 +107,14 @@ md-sidenav {
       padding-top: 8px;
     }
   }
+
+  md-content {
+    background-color: #fafafa;
+    color: #555;
+  }
+}
+
+.md-body-1 {
+  font-size: 12px;
+  line-height: 1.4;
 }
