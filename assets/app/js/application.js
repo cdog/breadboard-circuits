@@ -5,7 +5,7 @@ if (typeof window.Wyliodrin === 'undefined') {
 (function (Wyliodrin) {
   'use strict';
 
-  Wyliodrin.schemed = {
+  Wyliodrin.bc = {
     parts: [],
     partsPath: 'assets/app/parts/parts.json'
   };
@@ -119,14 +119,14 @@ if (typeof window.Wyliodrin === 'undefined') {
     var parts = localStorage.getItem('parts');
 
     if (parts !== null) {
-      Wyliodrin.schemed.parts = JSON.parse(parts);
+      Wyliodrin.bc.parts = JSON.parse(parts);
 
-      $rootScope.$emit('loaded.wyliodrin.parts');
+      $rootScope.$emit('bc:library:loaded');
 
       return;
     }
 
-    $http.get(Wyliodrin.schemed.partsPath, {
+    $http.get(Wyliodrin.bc.partsPath, {
       eventHandlers: {
         progress: function (event) {
           if (event.lengthComputable) {
@@ -143,35 +143,10 @@ if (typeof window.Wyliodrin === 'undefined') {
         // Nothing to do.
       }
 
-      Wyliodrin.schemed.parts = response.data;
+      Wyliodrin.bc.parts = response.data;
 
-      $rootScope.$emit('loaded.wyliodrin.parts');
+      $rootScope.$emit('bc:library:loaded');
     });
-  }
-
-  function flattenCategory(elem) {
-    var parts = [];
-
-    angular.forEach(elem, function (value, key) {
-      var part = {
-        key: key,
-        title: value.title,
-        type: value.type
-      };
-
-      if (value.type === 'part') {
-        part.id = value.id;
-        part.icon = 'assets/app/parts/svg/icons/' + value.views.icon;
-      }
-
-      parts.push(part);
-
-      if (value.type === 'group') {
-        parts = parts.concat(flattenCategory(value.parts));
-      }
-    });
-
-    return parts;
   }
 
   function _findPart(group, id) {
@@ -193,21 +168,21 @@ if (typeof window.Wyliodrin === 'undefined') {
   }
 
   function findPart(id) {
-    return _findPart(Wyliodrin.schemed.parts, id);
+    return _findPart(Wyliodrin.bc.parts, id);
   }
 
-  var schemedApp = angular.module('MyApp', [
+  var bcApp = angular.module('MyApp', [
     'ngMaterial'
   ]);
 
-  schemedApp.config(function ($mdThemingProvider) {
+  bcApp.config(function ($mdThemingProvider) {
     $mdThemingProvider
       .theme('default')
       .primaryPalette('blue')
       .accentPalette('red');
   });
 
-  schemedApp.controller('AppCtrl', function ($http, $rootScope, $scope, $q) {
+  bcApp.controller('AppCtrl', function ($http, $rootScope, $scope, $q) {
     loadParts($http, $rootScope, $scope);
 
     $scope.resetView = function () {
@@ -228,11 +203,11 @@ if (typeof window.Wyliodrin === 'undefined') {
     $scope.category = null;
     $scope.categories = null;
 
-    var x = $q(function (resolve) {
-      $rootScope.$on('loaded.wyliodrin.parts', function () {
+    var q = $q(function (resolve) {
+      $rootScope.$on('bc:library:loaded', function () {
         var categories = [];
 
-        angular.forEach(Wyliodrin.schemed.parts, function (value, key) {
+        angular.forEach(Wyliodrin.bc.parts, function (value, key) {
           var category = {
             key: key,
             title: value.title
@@ -253,7 +228,7 @@ if (typeof window.Wyliodrin === 'undefined') {
     });
 
     $scope.loadCategories = function () {
-      return $scope.categories || x;
+      return $scope.categories || q;
     };
 
     $scope.parts = null;
@@ -263,7 +238,7 @@ if (typeof window.Wyliodrin === 'undefined') {
         return;
       }
 
-      $scope.parts = flattenCategory(Wyliodrin.schemed.parts[$scope.category].parts);
+      $scope.parts = Wyliodrin.bc.parts[$scope.category].parts;
     };
 
     $scope.$watch('category', $scope.loadCategory);

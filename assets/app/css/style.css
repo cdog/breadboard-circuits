@@ -1,6 +1,37 @@
-.progress {
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+md-progress-linear,
+md-progress-linear .md-container,
+md-progress-linear .md-container .md-bar {
+  height: 2px;
+}
+md-progress-linear.progress {
   position: absolute;
-  z-index: 10;
+  z-index: 80;
+}
+#toolbar {
+  background-image: -webkit-linear-gradient(top, #fefefe 0%, #ccc 100%);
+  background-image:         linear-gradient(to bottom, #fefefe 0%, #ccc 100%);
+  background-repeat: repeat-x;
+  border-bottom: 1px solid #aaa;
+  border-top: 1px solid #fafafa;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+  color: #333;
+  z-index: 70;
+}
+#toolbar .md-menu > button:focus,
+#toolbar .md-menu.md-open > button {
+  background: #2196f3;
+  color: #fff;
+}
+#toolbar .md-button {
+  color: #333;
 }
 #viewport {
   bottom: 0;
@@ -13,16 +44,27 @@
   background-color: #f8f8f8;
   display: block;
 }
+md-list {
+  font-size: 14px;
+}
 md-list md-divider {
   margin-top: 10px;
 }
+md-list-item .md-list-item-inner {
+  min-height: 44px;
+}
 md-list-item .md-list-item-inner .md-avatar {
   border-radius: 0;
+  height: 32px;
+  margin-bottom: 6px;
+  margin-top: 6px;
+  width: 32px;
 }
 md-list-item .md-list-item-inner p {
   line-height: 1.2;
 }
 .md-title {
+  color: #333;
   margin-bottom: 10px;
   margin-top: 10px;
 }
@@ -33,6 +75,63 @@ md-list-item .md-list-item-inner p {
 }
 md-chips .md-chips {
   box-shadow: none;
+}
+md-chips .md-chips .md-chip {
+  border-radius: 12px;
+  font-size: 11px;
+  height: 24px;
+  line-height: 23px;
+  padding-bottom: 1px;
+  text-transform: lowercase;
+}
+md-sidenav {
+  background-color: #fafafa;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+  width: 280px;
+}
+md-sidenav[md-component-id="left"] {
+  border-right: 1px solid #aaa;
+}
+md-sidenav[md-component-id="right"] {
+  border-left: 1px solid #aaa;
+}
+md-sidenav md-divider {
+  border-top-color: #aaa;
+}
+md-sidenav .md-subheader {
+  background-color: #ddd;
+  border-bottom: 1px solid #aaa;
+  border-top: 1px solid #fafafa;
+  color: #333;
+  font-size: 11px;
+  font-weight: 400;
+}
+md-sidenav .md-subheader .md-subheader-inner {
+  padding-bottom: 8px;
+  padding-top: 8px;
+}
+md-sidenav md-content {
+  background-color: #fafafa;
+  color: #555;
+}
+md-sidenav > md-toolbar,
+#main > md-toolbar {
+  background-image: -webkit-linear-gradient(top, #fefefe 0%, #ddd 100%);
+  background-image:         linear-gradient(to bottom, #fefefe 0%, #ddd 100%);
+  background-repeat: repeat-x;
+  border-bottom: 1px solid #aaa;
+  border-top: 1px solid #fafafa;
+  min-height: 40px;
+}
+md-sidenav > md-toolbar .md-toolbar-tools,
+#main > md-toolbar .md-toolbar-tools {
+  color: #333;
+  font-size: 14px;
+  height: 38px;
+}
+.md-body-1 {
+  font-size: 12px;
+  line-height: 1.4;
 }
 .editing .component {
   cursor: move !important;
