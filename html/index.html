@@ -12,8 +12,8 @@
     <link href="assets/app/css/style.min.css" rel="stylesheet">
   </head>
   <body ng-app="MyApp" ng-controller="AppCtrl as ctrl" layout="column" ng-cloak>
-    <md-progress-linear md-mode="determinate" class="md-accent progress" value="{{ progress }}" ng-show="progress < 100"></md-progress-linear>
-    <md-toolbar layout="row" md-whiteframe="2">
+    <md-progress-linear md-mode="determinate" class="progress" value="{{ progress }}" ng-show="progress < 100"></md-progress-linear>
+    <md-toolbar class="toolbar" layout="row">
       <div class="md-toolbar-tools">
         <h2>Breadboard Circuits</h2>
         <md-menu-bar>
@@ -56,7 +56,7 @@
       </div>
     </md-toolbar>
     <div flex layout="row">
-      <md-sidenav md-component-id="left" md-is-locked-open="true" md-whiteframe="2">
+      <md-sidenav md-component-id="left" md-is-locked-open="true">
         <md-toolbar>
           <h1 class="md-toolbar-tools">Library</h1>
         </md-toolbar>
@@ -84,10 +84,15 @@
           </section>
         </md-content>
       </md-sidenav>
-      <md-content flex>
-        <div id="viewport"></div>
-      </md-content>
-      <md-sidenav md-component-id="right" md-is-locked-open="true" md-whiteframe="2">
+      <section flex layout="column">
+        <md-toolbar>
+          <h1 class="md-toolbar-tools">No selection</h1>
+        </md-toolbar>
+        <md-content flex layout="row">
+          <div id="viewport"></div>
+        </md-content>
+      </section>
+      <md-sidenav md-component-id="right" md-is-locked-open="true">
         <md-toolbar>
           <h1 class="md-toolbar-tools">Inspector</h1>
         </md-toolbar>
