@@ -13,7 +13,7 @@
   </head>
   <body ng-app="MyApp" ng-controller="AppCtrl as ctrl" layout="column" ng-cloak>
     <md-progress-linear md-mode="determinate" class="progress" value="{{ progress }}" ng-show="progress < 100"></md-progress-linear>
-    <md-toolbar class="toolbar" layout="row">
+    <md-toolbar id="toolbar" layout="row">
       <div class="md-toolbar-tools">
         <h2>Breadboard Circuits</h2>
         <md-menu-bar>
@@ -97,7 +97,7 @@
           <h1 class="md-toolbar-tools">Inspector</h1>
         </md-toolbar>
         <md-content class="md-padding" ng-show="part === null">
-          <p class="md-body-1">Hover over a thumbnail to inspect any part.</p>
+          <p class="md-body-1">Hover over a library item to inspect it.</p>
         </md-content>
         <md-content class="md-padding" ng-model="part" ng-show="part">
           <h4 class="md-title">{{ part.title }}</h4>
