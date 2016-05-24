@@ -15,7 +15,6 @@ md-progress-linear {
   }
 }
 
-
 #toolbar {
   background-image: linear-gradient(to bottom, #fefefe 0%, #ccc 100%);
   background-repeat: repeat-x;
@@ -24,6 +23,14 @@ md-progress-linear {
   box-shadow: 0 0 4px rgba(0, 0, 0, .15);
   color: #333;
   z-index: 70;
+
+  .md-menu {
+    > button:focus,
+    &.md-open > button {
+      background: #2196f3;
+      color: #fff;
+    }
+  }
 
   .md-button {
     color: #333;
