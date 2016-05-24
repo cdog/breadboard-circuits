@@ -2,9 +2,32 @@
   display: none !important;
 }
 
-.progress {
-  position: absolute;
-  z-index: 10;
+md-progress-linear {
+  &,
+  .md-container,
+  .md-container .md-bar {
+    height: 2px;
+  }
+
+  &.progress {
+    position: absolute;
+    z-index: 80;
+  }
+}
+
+
+md-toolbar.toolbar {
+  background-image: linear-gradient(to bottom, #fefefe 0%, #ccc 100%);
+  background-repeat: repeat-x;
+  border-bottom: 1px solid #aaa;
+  border-top: 1px solid #fafafa;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+  color: #333;
+  z-index: 70;
+
+  .md-button {
+    color: #333;
+  }
 }
 
 #viewport {
@@ -75,19 +98,15 @@ md-chips {
 
 md-sidenav {
   background-color: #fafafa;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+  width: 280px;
 
-  > md-toolbar {
-    background-image: linear-gradient(to bottom, #fefefe 0%, #ddd 100%);
-    background-repeat: repeat-x;
-    border-bottom: 1px solid #aaa;
-    border-top: 1px solid #fafafa;
-    min-height: 40px;
+  &[md-component-id="left"] {
+    border-right: 1px solid #aaa;
+  }
 
-    .md-toolbar-tools {
-      color: #333;
-      font-size: 14px;
-      height: 40px;
-    }
+  &[md-component-id="right"] {
+    border-left: 1px solid #aaa;
   }
 
   md-divider {
@@ -111,6 +130,23 @@ md-sidenav {
   md-content {
     background-color: #fafafa;
     color: #555;
+  }
+}
+
+md-sidenav,
+#main {
+  > md-toolbar {
+    background-image: linear-gradient(to bottom, #fefefe 0%, #ddd 100%);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #aaa;
+    border-top: 1px solid #fafafa;
+    min-height: 40px;
+
+    .md-toolbar-tools {
+      color: #333;
+      font-size: 14px;
+      height: 38px;
+    }
   }
 }
 
