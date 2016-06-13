@@ -74,7 +74,7 @@
         <md-divider></md-divider>
         <md-content>
           <section ng-repeat="group in parts">
-            <md-subheader>{{ group.title }}</md-subheader>
+            <md-subheader ng-if="group.title">{{ group.title }}</md-subheader>
             <md-list ng-mouseleave="deinspect()">
               <md-list-item ng-repeat="part in group.parts" ng-click="null" ng-mouseenter="inspect(part.id)">
                 <img ng-src="assets/app/parts/svg/icons/{{ part.views.icon }}" alt="{{ part.title }}" class="md-avatar">
