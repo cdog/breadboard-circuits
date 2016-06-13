@@ -238,7 +238,18 @@ if (typeof window.Wyliodrin === 'undefined') {
         return;
       }
 
-      $scope.parts = Wyliodrin.bc.parts[$scope.category].parts;
+      var parts = Wyliodrin.bc.parts[$scope.category].parts;
+
+      if (parts[0].type === 'part') {
+        parts = [
+          {
+            parts: parts,
+            type: 'group'
+          }
+        ];
+      }
+
+      $scope.parts = parts;
     };
 
     $scope.$watch('category', $scope.loadCategory);

@@ -42,6 +42,7 @@ md-progress-linear.progress {
 }
 #canvas {
   background-color: #f8f8f8;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, .15);
   display: block;
 }
 md-list {
@@ -86,7 +87,6 @@ md-chips .md-chips .md-chip {
 }
 md-sidenav {
   background-color: #fafafa;
-  box-shadow: 0 0 4px rgba(0, 0, 0, .15);
   width: 280px;
 }
 md-sidenav[md-component-id="left"] {
