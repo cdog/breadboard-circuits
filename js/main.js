@@ -11,6 +11,10 @@
   var gridStroke = '#ddd';
   var gridStrokeWidth = 1;
 
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   function zoomed() {
     pattern.attr('patternTransform', 'translate(' + d3.event.translate + ') scale(' + d3.event.scale + ')');
     defs.select('path').attr('stroke-width', 0.5 / d3.event.scale);
@@ -37,7 +41,7 @@
     d3.select(this).classed('dragging', false);
   }
 
-  d3.behavior.drag()
+  var drag = d3.behavior.drag()
     .origin(function () {
       return {
         x: d3.select(this).attr('x'),
@@ -256,6 +260,22 @@
 
     $scope.deinspect = function () {
       $scope.part = null;
+    };
+
+    $scope.grab = function (id) {
+      var part = findPart(id);
+
+      d3.xml('assets/app/parts/svg/breadboard/' + part.views.breadboard, 'image/svg+xml', function (xml) {
+        var node = group.node().appendChild(xml.documentElement);
+
+        d3.select(node)
+          .attr('class', 'component')
+          .attr('width', 660)
+          .attr('height', 220)
+          .attr('x', getRandomInt(0, 640))
+          .attr('y', getRandomInt(0, 480))
+          .call(drag);
+      });
     };
   });
 })();
