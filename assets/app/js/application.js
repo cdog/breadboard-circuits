@@ -280,13 +280,12 @@ if (typeof window.Wyliodrin === 'undefined') {
 
       d3.xml('assets/app/parts/svg/breadboard/' + part.views.breadboard, 'image/svg+xml', function (xml) {
         var node = group.node().appendChild(xml.documentElement);
+        var rect = canvas.node().getBoundingClientRect();
 
         d3.select(node)
           .attr('class', 'component')
-          .attr('width', 660)
-          .attr('height', 220)
-          .attr('x', getRandomInt(0, 640))
-          .attr('y', getRandomInt(0, 480))
+          .attr('x', getRandomInt(0, rect.width))
+          .attr('y', getRandomInt(0, rect.height))
           .call(drag);
       });
     };
